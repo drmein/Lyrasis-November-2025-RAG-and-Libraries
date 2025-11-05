@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library FAQ: RAG vs Non-RAG Comparison</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .mode-toggle {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+
+        .mode-toggle h3 {
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .mode-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .mode-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .mode-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .collapsible {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .collapsible:hover {
+            border-color: #667eea;
+        }
+
+        .collapsible h4 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #667eea;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.active {
+            max-height: 1000px;
+            padding-top: 15px;
+        }
+
+        .collapsible-content p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .setup-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .setup-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            margin-left: 10px;
+        }
+
+        .status {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-panel {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background: white;
+        }
+
+        .comparison-panel h3 {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .comparison-panel.rag {
+            border-color: #667eea;
+        }
+
+        .comparison-panel.rag h3 {
+            color: #667eea;
+            border-color: #667eea;
+        }
+
+        .comparison-panel.no-rag {
+            border-color: #ffc107;
+        }
+
+        .comparison-panel.no-rag h3 {
+            color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .answer-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            line-height: 1.6;
+        }
+
+        .answer-box.empty {
+            color: #999;
+            font-style: italic;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-section h3 {
+            margin-bottom: 15px;
+        }
+
+        .question-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .question-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .example-questions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .example-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .example-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .rag-context {
+            background: #e8f4f8;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .rag-context h4 {
+            margin-bottom: 8px;
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        .context-match {
+            background: white;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border-left: 3px solid #667eea;
+        }
+
+        .similarity-score {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .loading:after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .arrow {
+            transition: transform 0.3s;
+        }
+
+        .arrow.rotated {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Library FAQ Assistant</h1>
+            <p>Side-by-Side Comparison: RAG vs Non-RAG</p>
+            <p style="font-size: 12px; opacity: 0.7; margin-top: 10px;">Live Demo for LYRASIS Presentation - November 5, 2025</p>
+        </div>
+
+        <div class="content">
+            <!-- Mode Selection -->
+            <div class="mode-toggle">
+                <h3>Choose Demo Mode</h3>
+                <div class="mode-buttons">
+                    <button class="mode-btn active" onclick="switchMode('demo')">
+                        🎭 Demo Mode (No API Key Needed)
+                    </button>
+                    <button class="mode-btn" onclick="switchMode('live')">
+                        ⚡ Live Mode (Requires OpenAI API Key)
+                    </button>
+                </div>
+                <p style="margin-top: 10px; font-size: 13px; color: #666;">
+                    <strong>Demo Mode:</strong> Pre-generated answers, perfect for trying out the interface<br>
+                    <strong>Live Mode:</strong> Real-time AI responses, requires your OpenAI API key
+                </p>
+            </div>
+
+            <!-- Collapsible Help Sections -->
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <h4>
+                    <span>📖 What is RAG? (Click to expand)</span>
+                    <span class="arrow">▶</span>
+                </h4>
+                <div class="collapsible-content">
+                    <p><strong>RAG = Retrieval-Augmented Generation</strong></p>
+                    <p>RAG is a technique that improves AI accuracy by giving it access to specific information before generating an answer.</p>
+                    <p style="margin-top: 10px;"><strong>How it works:</strong></p>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>You ask a question:</strong> "What are the library hours?"</li>
+                        <li><strong>System retrieves relevant info:</strong> Finds the 3 most similar FAQ entries</li>
+                        <li><strong>AI gets context:</strong> Reads those FAQs before answering</li>
+                        <li><strong>Better answer:</strong> Accurate, specific, cites sources</li>
+                    </ol>
+                    <p style="margin-top: 10px;"><strong>Without RAG:</strong> The AI only uses its training data (may be outdated or generic)</p>
+                </div>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <h4>
+                    <span>🔬 How This Demo Works (Click to expand)</span>
+                    <span class="arrow">▶</span>
+                </h4>
+                <div class="collapsible-content">
+                    <p><strong>LEFT Panel (WITH RAG):</strong></p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>Searches 26 library FAQ entries</li>
+                        <li>Finds top 3 most relevant matches using semantic similarity</li>
+                        <li>Shows you which FAQs it found (with % similarity scores)</li>
+                        <li>AI reads those FAQs before answering</li>
+                        <li>Result: Accurate answer citing specific sources</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>RIGHT Panel (WITHOUT RAG):</strong></p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>No FAQ search happens</li>
+                        <li>AI relies only on its general training data</li>
+                        <li>May provide generic or outdated information</li>
+                        <li>No specific sources cited</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <h4>
+                    <span>💡 Why Does This Matter for Libraries? (Click to expand)</span>
+                    <span class="arrow">▶</span>
+                </h4>
+                <div class="collapsible-content">
+                    <p><strong>Problem:</strong> AI chatbots often "hallucinate" (make up facts)</p>
+                    <p><strong>Solution:</strong> RAG gives AI access to your authoritative library information</p>
+                    <p style="margin-top: 10px;"><strong>Real-world library uses:</strong></p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>Answer patron questions 24/7 with accurate info</li>
+                        <li>Search databases more effectively (semantic search)</li>
+                        <li>Provide personalized research assistance</li>
+                        <li>Reduce hallucinations by 71% (research-backed)</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Examples in libraries today:</strong> KingbotGPT (King County), Columbia Clio, JSTOR Research Rabbit, EBSCO Explainer, and more!</p>
+                </div>
+            </div>
+
+            <!-- Setup Section (only for live mode) -->
+            <div class="setup-section hidden" id="setupSection">
+                <h3>🔑 Live Mode Setup - OpenAI API Key Required</h3>
+                <div class="input-group">
+                    <label for="apiKey">OpenAI API Key:</label>
+                    <input type="password" id="apiKey" placeholder="sk-...">
+                    <small style="color: #666;">Get a key at: <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com/api-keys</a></small>
+                </div>
+                <button class="btn" onclick="saveApiKey()">Initialize Live Demo</button>
+                <button class="btn btn-secondary" onclick="clearAll()">Clear All Data</button>
+                <div id="setupStatus"></div>
+                <p style="margin-top: 10px; font-size: 13px; color: #666;">
+                    <strong>Cost:</strong> ~$0.01 for initial setup (generates embeddings), ~$0.001 per question
+                </p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats hidden" id="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="faqCount">26</div>
+                    <div class="stat-label">FAQ Entries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="modeStatus">DEMO</div>
+                    <div class="stat-label">Current Mode</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="queryCount">0</div>
+                    <div class="stat-label">Questions Asked</div>
+                </div>
+            </div>
+
+            <!-- Question Input -->
+            <div class="input-section hidden" id="inputSection">
+                <h3>❓ Ask a Library Question</h3>
+                <input type="text"
+                       id="questionInput"
+                       class="question-input"
+                       placeholder="Type your library question here..."
+                       onkeypress="handleKeyPress(event)">
+                <button class="btn" onclick="askQuestion()">Compare Answers</button>
+
+                <div style="margin-top: 15px;">
+                    <small style="color: #666;">Try these examples:</small>
+                    <div class="example-questions">
+                        <button class="example-btn" onclick="useExample('What are the library hours?')">Library Hours</button>
+                        <button class="example-btn" onclick="useExample('Can I renew my books?')">Renew Books</button>
+                        <button class="example-btn" onclick="useExample('How do I access databases from home?')">Database Access</button>
+                        <button class="example-btn" onclick="useExample('Do you have study rooms?')">Study Rooms</button>
+                        <button class="example-btn" onclick="useExample('What if my book is overdue?')">Late Fees</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison Display -->
+            <div class="comparison-container hidden" id="comparisonContainer">
+                <div class="comparison-panel rag">
+                    <h3>✅ WITH RAG (Retrieval-Augmented Generation)</h3>
+                    <div class="answer-box" id="ragAnswer">
+                        <div class="empty">Ask a question to see RAG-enhanced answer</div>
+                    </div>
+                    <div class="rag-context hidden" id="ragContext">
+                        <h4>📖 Retrieved Context (Top 3 Matches)</h4>
+                        <div id="contextMatches"></div>
+                    </div>
+                </div>
+
+                <div class="comparison-panel no-rag">
+                    <h3>⚠️ WITHOUT RAG (Generic LLM Only)</h3>
+                    <div class="answer-box" id="noRagAnswer">
+                        <div class="empty">Ask a question to see non-RAG answer</div>
+                    </div>
+                    <div class="rag-context" style="background: #fff3cd;">
+                        <h4>ℹ️ How This Works</h4>
+                        <p style="font-size: 12px; margin: 0;">This answer is generated without accessing any FAQ data. The AI relies only on its training data, which may be outdated or generic.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // FAQ Knowledge Base (from sample_library_faq_data.csv)
+        const FAQ_DATA = [
+            {q: "What are the library hours?", a: "The library is open Monday-Friday 8:00 AM to 10:00 PM, Saturday 10:00 AM to 6:00 PM, and Sunday 12:00 PM to 8:00 PM. Hours may vary during holidays and breaks - check our website for updated hours.", category: "hours"},
+            {q: "When does the library close?", a: "Regular closing times are 10:00 PM Monday-Friday, 6:00 PM Saturday, and 8:00 PM Sunday. During finals week we extend hours to midnight.", category: "hours"},
+            {q: "Are you open on weekends?", a: "Yes! We're open Saturdays 10:00 AM - 6:00 PM and Sundays 12:00 PM - 8:00 PM.", category: "hours"},
+            {q: "What are your holiday hours?", a: "The library follows the university calendar for holidays. We're typically closed on major holidays (Thanksgiving, Christmas, New Year's) and have reduced hours during winter and spring breaks. Check our homepage for specific dates.", category: "hours"},
+            {q: "Do you have 24-hour study spaces?", a: "Our main reading room is not 24-hour, but we do have a designated 24-hour study lounge on the second floor that's accessible with your student ID card.", category: "hours"},
+            {q: "How do I reserve a study room?", a: "Study rooms can be reserved through our online booking system at libcal.yourlibrary.edu. Rooms are available for 2-hour blocks and require your student ID to book. Walk-ins are welcome if rooms are available.", category: "facilities"},
+            {q: "Can I book a group study room?", a: "Yes! Group study rooms (capacity 4-8 people) can be booked online up to 7 days in advance. You'll need to sign in with your library account.", category: "facilities"},
+            {q: "Do you have private study spaces?", a: "We have individual study carrels on the third floor available on a first-come, first-served basis. For longer-term carrel assignments, visit the circulation desk.", category: "facilities"},
+            {q: "Is there a quiet study area?", a: "Yes, the entire third floor is designated as a silent study zone. The second floor allows quiet conversation, and the first floor is a collaborative space.", category: "facilities"},
+            {q: "Can I eat in the library?", a: "Light snacks and drinks with secure lids are permitted on all floors except the Archives (4th floor). No hot food or open containers please.", category: "facilities"},
+            {q: "How do I access databases from home?", a: "You can access all library databases from off-campus by logging in with your university credentials. When you click on a database link, you'll be prompted to enter your username and password if you're not on campus WiFi.", category: "database"},
+            {q: "Why can't I access JSTOR from home?", a: "If you're having trouble accessing JSTOR or other databases off-campus, make sure you're using the library's link (not Google) and that you're entering your full university login credentials. Clear your browser cache if issues persist, or contact the help desk.", category: "database"},
+            {q: "Do I need a VPN to use library resources?", a: "No VPN is needed! Our databases use proxy authentication. Just access them through the library website and log in with your university credentials when prompted.", category: "database"},
+            {q: "How do I find peer-reviewed articles?", a: "Use our article databases like JSTOR, Academic Search Complete, or ProQuest. Most databases have a filter or checkbox to limit results to peer-reviewed or scholarly sources. You can also ask a librarian for help choosing the best database for your topic.", category: "database"},
+            {q: "What's the difference between a database and Google Scholar?", a: "Library databases provide access to subscription content that's not freely available on Google. They also offer better filtering, citation tools, and guaranteed access to full-text articles. Google Scholar can be useful for discovery, but databases provide more reliable access.", category: "database"},
+            {q: "How many books can I check out?", a: "Undergraduate students can check out up to 20 books at a time. Graduate students can check out up to 50. Faculty limits vary by department.", category: "policies"},
+            {q: "How long can I keep a book?", a: "Most books have a 3-week loan period with one renewal (if no one else has requested it). Reserve materials have shorter loan periods (2 hours to 3 days depending on the item).", category: "policies"},
+            {q: "Can I renew my books?", a: "Yes! You can renew most items online through your library account or by calling the circulation desk. Books can be renewed once unless another patron has placed a hold.", category: "policies"},
+            {q: "What happens if I return a book late?", a: "Overdue fines are $0.25 per day per item, up to a maximum of $10 per item. Items more than 30 days overdue are considered lost and you'll be charged the replacement cost plus a $10 processing fee.", category: "policies"},
+            {q: "Can I renew if it's late?", a: "Yes, you can still renew an overdue book if no one else has requested it. However, you'll still owe fines for the days it was overdue.", category: "policies"},
+            {q: "Do you have textbooks?", a: "We have a limited collection of textbooks on Course Reserve. These are for in-library use only (2-hour checkout) or overnight checkout depending on instructor preference. Check the Reserve section or ask at the circulation desk.", category: "collections"},
+            {q: "How do I request a book from another library?", a: "Use our Interlibrary Loan (ILL) service! Log in to your ILL account, enter the book information, and we'll request it from another library. Most items arrive within 5-10 business days and you'll get an email when it's ready for pickup.", category: "services"},
+            {q: "Can I get articles from other universities?", a: "Yes, through Interlibrary Loan. If we don't have access to an article you need, submit an ILL request and we'll get you a PDF usually within 2-3 business days, often faster.", category: "services"},
+            {q: "Is there a scanner I can use?", a: "Yes! We have flatbed scanners and large-format scanners available on all floors. There's also a scan-to-email feature on our photocopiers. All scanning is free.", category: "technology"},
+            {q: "Do you have laptops I can borrow?", a: "Yes, laptops are available for in-library checkout (4-hour loan periods). Check them out at the circulation desk with your student ID. We have both Windows and Mac laptops available.", category: "technology"},
+            {q: "Is the WiFi free?", a: "Yes, the library has free WiFi throughout the building. Connect to 'University-WiFi' and log in with your university credentials. Guests can use 'Guest-WiFi' for 24-hour access.", category: "technology"}
+        ];
+
+        // Demo mode pre-generated answers
+        const DEMO_ANSWERS = {
+            "What are the library hours?": {
+                rag: "According to our library hours FAQ, the library is open Monday-Friday 8:00 AM to 10:00 PM, Saturday 10:00 AM to 6:00 PM, and Sunday 12:00 PM to 8:00 PM. Please note that hours may vary during holidays and breaks, so it's recommended to check our website for the most current information.",
+                noRag: "Most university libraries are typically open from early morning to late evening on weekdays, with reduced hours on weekends. I'd recommend checking your library's website for specific hours, as they can vary by location and time of year. Many libraries also extend their hours during finals week.",
+                matches: [0, 1, 2]
+            },
+            "Can I renew my books?": {
+                rag: "Yes! According to our circulation policies, you can renew most items online through your library account or by calling the circulation desk. Books can be renewed once unless another patron has placed a hold on the item. Even if a book is overdue, you can still renew it as long as no one else has requested it, though you'll still owe fines for the overdue days.",
+                noRag: "Generally, yes - most libraries allow you to renew books, either online through your library account, by phone, or in person. There's usually a limit on how many times you can renew an item, and renewals may not be possible if someone else has placed a hold on the book. Check your library's website or call them for specific renewal policies.",
+                matches: [17, 19, 16]
+            },
+            "How do I access databases from home?": {
+                rag: "Based on our database access FAQ, you can access all library databases from off-campus by logging in with your university credentials. When you click on a database link, you'll be prompted to enter your username and password if you're not on campus WiFi. No VPN is needed - our databases use proxy authentication. Just access them through the library website and log in with your university credentials when prompted.",
+                noRag: "To access library databases from home, you'll typically need to authenticate through your institution's network. This usually involves one of two methods: either you'll be redirected to a login page where you enter your university credentials, or you might need to use a VPN (Virtual Private Network) provided by your school. Start by going to your library's website and clicking on the database you need.",
+                matches: [10, 12, 11]
+            },
+            "Do you have study rooms?": {
+                rag: "Yes! According to our facilities FAQ, study rooms can be reserved through our online booking system at libcal.yourlibrary.edu. Rooms are available for 2-hour blocks and require your student ID to book. Walk-ins are also welcome if rooms are available. We have group study rooms with capacity for 4-8 people that can be booked online up to 7 days in advance.",
+                noRag: "Most university libraries do have study rooms available. These are typically reservable spaces that students can book for individual or group study. You'll usually need to reserve them through an online booking system or at the circulation desk. Study rooms often have features like whiteboards, comfortable seating, and sometimes display screens for group work.",
+                matches: [5, 6, 8]
+            },
+            "What if my book is overdue?": {
+                rag: "According to our circulation policies, overdue fines are $0.25 per day per item, up to a maximum of $10 per item. Items more than 30 days overdue are considered lost and you'll be charged the replacement cost plus a $10 processing fee. The good news is that you can still renew an overdue book if no one else has requested it, though you'll still owe fines for the days it was overdue.",
+                noRag: "If your book is overdue, you'll typically face late fees that accumulate daily, usually ranging from $0.25 to $1.00 per day depending on your library's policy. After a certain period (often 30-60 days), the item may be declared lost and you'll be charged the replacement cost. I recommend returning it as soon as possible or contacting the library to discuss your options, as some libraries offer fee forgiveness programs.",
+                matches: [18, 19, 17]
+            }
+        };
+
+        // State
+        let currentMode = 'demo';
+        let apiKey = '';
+        let embeddings = [];
+        let queryCount = 0;
+
+        // Initialize
+        window.onload = function() {
+            loadState();
+            showDemoInterface();
+        };
+
+        function loadState() {
+            apiKey = localStorage.getItem('faqApiKey') || '';
+            if (apiKey) {
+                document.getElementById('apiKey').value = apiKey;
+            }
+        }
+
+        function toggleCollapsible(element) {
+            const content = element.querySelector('.collapsible-content');
+            const arrow = element.querySelector('.arrow');
+
+            content.classList.toggle('active');
+            arrow.classList.toggle('rotated');
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+
+            // Update button states
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update status
+            document.getElementById('modeStatus').textContent = mode.toUpperCase();
+
+            if (mode === 'demo') {
+                // Hide setup, show demo interface
+                document.getElementById('setupSection').classList.add('hidden');
+                showDemoInterface();
+            } else {
+                // Show setup section
+                document.getElementById('setupSection').classList.remove('hidden');
+                document.getElementById('inputSection').classList.add('hidden');
+                document.getElementById('comparisonContainer').classList.add('hidden');
+
+                // If API key exists, initialize
+                if (apiKey) {
+                    initializeIfReady();
+                }
+            }
+        }
+
+        function showDemoInterface() {
+            document.getElementById('stats').classList.remove('hidden');
+            document.getElementById('inputSection').classList.remove('hidden');
+            document.getElementById('comparisonContainer').classList.remove('hidden');
+            displayStats();
+        }
+
+        function displayStats() {
+            document.getElementById('faqCount').textContent = FAQ_DATA.length;
+            document.getElementById('modeStatus').textContent = currentMode.toUpperCase();
+            document.getElementById('queryCount').textContent = queryCount;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                askQuestion();
+            }
+        }
+
+        function useExample(question) {
+            document.getElementById('questionInput').value = question;
+            askQuestion();
+        }
+
+        async function askQuestion() {
+            const question = document.getElementById('questionInput').value.trim();
+            if (!question) return;
+
+            queryCount++;
+            displayStats();
+
+            if (currentMode === 'demo') {
+                askQuestionDemo(question);
+            } else {
+                askQuestionLive(question);
+            }
+        }
+
+        function askQuestionDemo(question) {
+            // Show loading states
+            document.getElementById('ragAnswer').innerHTML = '<div class="loading">Retrieving context and generating answer</div>';
+            document.getElementById('noRagAnswer').innerHTML = '<div class="loading">Generating answer without context</div>';
+
+            // Simulate processing delay
+            setTimeout(() => {
+                // Check if we have a pre-generated answer
+                if (DEMO_ANSWERS[question]) {
+                    const demo = DEMO_ANSWERS[question];
+
+                    // Display RAG answer
+                    document.getElementById('ragAnswer').innerHTML = demo.rag;
+
+                    // Display context matches
+                    displayDemoContext(demo.matches, question);
+
+                    // Display non-RAG answer
+                    document.getElementById('noRagAnswer').innerHTML = demo.noRag;
+                } else {
+                    // Generic demo response for custom questions
+                    const bestMatch = findBestMatchSimple(question);
+
+                    document.getElementById('ragAnswer').innerHTML =
+                        `<strong>Based on our FAQ database:</strong><br><br>${bestMatch.a}<br><br><em style="font-size: 12px; color: #666;">This answer was retrieved from our ${bestMatch.category} FAQ section (${(bestMatch.similarity * 100).toFixed(1)}% match).</em>`;
+
+                    displayDemoContext([bestMatch.idx], question);
+
+                    document.getElementById('noRagAnswer').innerHTML =
+                        `I'd be happy to help with that question. For the most accurate information about our library's specific policies and services, I recommend checking our website or contacting us directly. Library policies can vary by institution, so it's always best to verify with your local library.<br><br><em style="font-size: 12px; color: #666;">Note: This generic response doesn't use any specific FAQ data.</em>`;
+                }
+            }, 1000);
+        }
+
+        function findBestMatchSimple(question) {
+            // Simple keyword matching for demo
+            const keywords = question.toLowerCase().split(' ');
+            let bestMatch = { idx: 0, similarity: 0.5 };
+            let maxScore = 0;
+
+            FAQ_DATA.forEach((faq, idx) => {
+                let score = 0;
+                const faqText = (faq.q + ' ' + faq.a + ' ' + faq.category).toLowerCase();
+
+                keywords.forEach(keyword => {
+                    if (faqText.includes(keyword)) {
+                        score++;
+                    }
+                });
+
+                if (score > maxScore) {
+                    maxScore = score;
+                    bestMatch = {
+                        ...faq,
+                        idx,
+                        similarity: Math.min(0.95, 0.5 + (score * 0.1))
+                    };
+                }
+            });
+
+            return bestMatch;
+        }
+
+        function displayDemoContext(matchIndices, question) {
+            const contextContainer = document.getElementById('contextMatches');
+            contextContainer.innerHTML = '';
+
+            matchIndices.forEach((idx, i) => {
+                const item = FAQ_DATA[idx];
+                // Calculate demo similarity (higher for first matches)
+                const similarity = 0.95 - (i * 0.1);
+
+                const matchDiv = document.createElement('div');
+                matchDiv.className = 'context-match';
+                matchDiv.innerHTML = `
+                    <div class="similarity-score">${(similarity * 100).toFixed(1)}% similarity</div>
+                    <strong>Q:</strong> ${item.q}<br>
+                    <strong>A:</strong> ${item.a.substring(0, 100)}${item.a.length > 100 ? '...' : ''}
+                `;
+                contextContainer.appendChild(matchDiv);
+            });
+
+            document.getElementById('ragContext').classList.remove('hidden');
+        }
+
+        // === LIVE MODE FUNCTIONS ===
+
+        async function saveApiKey() {
+            apiKey = document.getElementById('apiKey').value.trim();
+            if (!apiKey) {
+                showStatus('setupStatus', 'error', 'Please enter an API key');
+                return;
+            }
+
+            localStorage.setItem('faqApiKey', apiKey);
+            showStatus('setupStatus', 'info', 'API key saved. Initializing...');
+
+            await initializeIfReady();
+        }
+
+        async function initializeIfReady() {
+            if (!apiKey) return;
+
+            // Check if embeddings exist in IndexedDB
+            const cachedEmbeddings = await getFromIndexedDB('faq_embeddings');
+
+            if (cachedEmbeddings && cachedEmbeddings.length === FAQ_DATA.length) {
+                embeddings = cachedEmbeddings;
+                showStatus('setupStatus', 'success', '✓ Ready! FAQ embeddings loaded from cache.');
+                showDemoInterface();
+            } else {
+                showStatus('setupStatus', 'info', `Generating embeddings for ${FAQ_DATA.length} FAQ entries... (~30 seconds, ~$0.01 cost)`);
+                await generateEmbeddings();
+            }
+        }
+
+        async function generateEmbeddings() {
+            try {
+                embeddings = [];
+
+                for (let i = 0; i < FAQ_DATA.length; i++) {
+                    const faq = FAQ_DATA[i];
+                    const text = `Question: ${faq.q}\nAnswer: ${faq.a}\nCategory: ${faq.category}`;
+
+                    showStatus('setupStatus', 'info', `Generating embeddings... ${i + 1}/${FAQ_DATA.length}`);
+
+                    const embedding = await getEmbedding(text);
+                    embeddings.push(embedding);
+
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                }
+
+                await saveToIndexedDB('faq_embeddings', embeddings);
+
+                showStatus('setupStatus', 'success', '✓ All embeddings generated and cached! Ready to demo.');
+                showDemoInterface();
+            } catch (error) {
+                showStatus('setupStatus', 'error', `Error: ${error.message}`);
+            }
+        }
+
+        async function getEmbedding(text) {
+            const response = await fetch('https://api.openai.com/v1/embeddings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    input: text,
+                    model: 'text-embedding-3-small'
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'Failed to generate embedding');
+            }
+
+            const data = await response.json();
+            return data.data[0].embedding;
+        }
+
+        async function askQuestionLive(question) {
+            if (embeddings.length === 0) {
+                alert('Please initialize the demo first by entering your API key');
+                return;
+            }
+
+            document.getElementById('ragAnswer').innerHTML = '<div class="loading">Retrieving context and generating answer</div>';
+            document.getElementById('noRagAnswer').innerHTML = '<div class="loading">Generating answer without context</div>';
+            document.getElementById('ragContext').classList.add('hidden');
+
+            try {
+                const [ragResult, noRagResult] = await Promise.all([
+                    generateRAGAnswer(question),
+                    generateNoRAGAnswer(question)
+                ]);
+
+                document.getElementById('ragAnswer').innerHTML = ragResult.answer;
+                displayContext(ragResult.context);
+                document.getElementById('noRagAnswer').innerHTML = noRagResult;
+
+            } catch (error) {
+                document.getElementById('ragAnswer').innerHTML = `<div style="color: #721c24;">Error: ${error.message}</div>`;
+                document.getElementById('noRagAnswer').innerHTML = `<div style="color: #721c24;">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function generateRAGAnswer(question) {
+            const queryEmbedding = await getEmbedding(question);
+
+            const similarities = embeddings.map((emb, idx) => ({
+                idx,
+                similarity: cosineSimilarity(queryEmbedding, emb)
+            }));
+
+            similarities.sort((a, b) => b.similarity - a.similarity);
+            const topMatches = similarities.slice(0, 3);
+
+            const context = topMatches.map(match => ({
+                ...FAQ_DATA[match.idx],
+                similarity: match.similarity
+            }));
+
+            const contextText = context.map((item, i) =>
+                `FAQ Entry ${i+1} (${(item.similarity * 100).toFixed(1)}% match):\nQ: ${item.q}\nA: ${item.a}`
+            ).join('\n\n');
+
+            const prompt = `You are a helpful library FAQ assistant. Use the following FAQ entries to answer the user's question accurately. If the FAQ entries don't contain the answer, say so.
+
+${contextText}
+
+User Question: ${question}
+
+Instructions: Provide a clear, direct answer based on the FAQ entries above. Cite which FAQ entry you used (e.g., "According to our hours FAQ..."). Keep your answer concise and helpful.`;
+
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4o-mini',
+                    messages: [{ role: 'user', content: prompt }],
+                    temperature: 0.3,
+                    max_tokens: 300
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate RAG answer');
+            }
+
+            const data = await response.json();
+            return {
+                answer: data.choices[0].message.content,
+                context: context
+            };
+        }
+
+        async function generateNoRAGAnswer(question) {
+            const prompt = `You are a helpful library FAQ assistant. Answer this question about a university library: ${question}
+
+Keep your answer concise and helpful. If you're not certain, make a reasonable assumption about a typical university library.`;
+
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4o-mini',
+                    messages: [{ role: 'user', content: prompt }],
+                    temperature: 0.3,
+                    max_tokens: 300
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate non-RAG answer');
+            }
+
+            const data = await response.json();
+            return data.choices[0].message.content;
+        }
+
+        function displayContext(context) {
+            const contextContainer = document.getElementById('contextMatches');
+            contextContainer.innerHTML = '';
+
+            context.forEach((item, i) => {
+                const matchDiv = document.createElement('div');
+                matchDiv.className = 'context-match';
+                matchDiv.innerHTML = `
+                    <div class="similarity-score">${(item.similarity * 100).toFixed(1)}% similarity</div>
+                    <strong>Q:</strong> ${item.q}<br>
+                    <strong>A:</strong> ${item.a.substring(0, 100)}${item.a.length > 100 ? '...' : ''}
+                `;
+                contextContainer.appendChild(matchDiv);
+            });
+
+            document.getElementById('ragContext').classList.remove('hidden');
+        }
+
+        function cosineSimilarity(a, b) {
+            let dotProduct = 0;
+            let normA = 0;
+            let normB = 0;
+
+            for (let i = 0; i < a.length; i++) {
+                dotProduct += a[i] * b[i];
+                normA += a[i] * a[i];
+                normB += b[i] * b[i];
+            }
+
+            return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+        }
+
+        function showStatus(elementId, type, message) {
+            const statusEl = document.getElementById(elementId);
+            statusEl.className = `status ${type}`;
+            statusEl.textContent = message;
+            statusEl.style.display = 'block';
+        }
+
+        function clearAll() {
+            if (confirm('Clear all data including API key and embeddings?')) {
+                localStorage.clear();
+                clearIndexedDB();
+                location.reload();
+            }
+        }
+
+        // IndexedDB helpers
+        function openDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open('FAQDemoDB', 1);
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => resolve(request.result);
+                request.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    if (!db.objectStoreNames.contains('cache')) {
+                        db.createObjectStore('cache');
+                    }
+                };
+            });
+        }
+
+        async function saveToIndexedDB(key, value) {
+            const db = await openDB();
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['cache'], 'readwrite');
+                const store = transaction.objectStore('cache');
+                const request = store.put(value, key);
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        async function getFromIndexedDB(key) {
+            const db = await openDB();
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['cache'], 'readonly');
+                const store = transaction.objectStore('cache');
+                const request = store.get(key);
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        async function clearIndexedDB() {
+            const db = await openDB();
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['cache'], 'readwrite');
+                const store = transaction.objectStore('cache');
+                const request = store.clear();
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject(request.error);
+            });
+        }
+    </script>
+</body>
+</html>
