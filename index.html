@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A comprehensive guide to RAG (Retrieval-Augmented Generation) resources for librarians and information professionals.">
+    <title>RAG Resources for Libraries | LibGuide</title>
+
+    <!--
+        RAG Resources LibGuide
+        License: MIT License
+
+        Copyright (c) 2025
+
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+    -->
+
+    <style>
+        /* ==================== CSS RESET & BASE STYLES ==================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color Palette */
+            --primary-blue: #2C5282;
+            --primary-blue-dark: #1e3a5f;
+            --primary-blue-light: #4A90E2;
+            --accent-warm: #D97706;
+            --accent-warm-light: #F59E0B;
+            --success-green: #059669;
+            --warning-orange: #D97706;
+
+            /* Neutral Colors */
+            --neutral-900: #1F2937;
+            --neutral-700: #374151;
+            --neutral-600: #4B5563;
+            --neutral-500: #6B7280;
+            --neutral-400: #9CA3AF;
+            --neutral-300: #D1D5DB;
+            --neutral-200: #E5E7EB;
+            --neutral-100: #F3F4F6;
+            --neutral-50: #F9FAFB;
+
+            /* Semantic Colors */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: var(--neutral-50);
+            --bg-tertiary: var(--neutral-100);
+            --text-primary: var(--neutral-900);
+            --text-secondary: var(--neutral-600);
+            --text-muted: var(--neutral-500);
+            --border-color: var(--neutral-200);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+            /* Typography */
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+
+            /* Layout */
+            --sidebar-width: 280px;
+            --max-content-width: 1200px;
+            --border-radius: 0.5rem;
+            --transition-speed: 0.2s;
+        }
+
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --border-color: #404040;
+            --primary-blue: #4A90E2;
+            --primary-blue-dark: #5fa3f5;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        /* ==================== TYPOGRAPHY ==================== */
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        h1 { font-size: 2.25rem; }
+        h2 { font-size: 1.875rem; margin-top: var(--spacing-xl); }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: var(--spacing-md);
+            font-size: 1.0625rem;
+        }
+
+        a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--primary-blue-dark);
+            text-decoration: underline;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.875em;
+            background-color: var(--bg-tertiary);
+            padding: 0.125rem 0.25rem;
+            border-radius: 3px;
+        }
+
+        /* ==================== LAYOUT ==================== */
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-blue);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            z-index: 100;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-lg);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-content {
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            margin: 0;
+            color: white;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: background-color var(--transition-speed);
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-toggle:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+
+        /* Hamburger Menu */
+        .menu-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.5rem;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Main Layout Container */
+        .layout-container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: var(--sidebar-width);
+            background-color: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            position: sticky;
+            top: 72px;
+            height: calc(100vh - 72px);
+            overflow-y: auto;
+            padding: var(--spacing-lg);
+            transition: transform var(--transition-speed);
+        }
+
+        aside::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        aside::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        aside::-webkit-scrollbar-thumb {
+            background: var(--neutral-400);
+            border-radius: 4px;
+        }
+
+        aside::-webkit-scrollbar-thumb:hover {
+            background: var(--neutral-500);
+        }
+
+        .nav-section {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .nav-section h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .nav-list a {
+            display: block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--text-secondary);
+            border-radius: var(--border-radius);
+            transition: all var(--transition-speed);
+            font-size: 0.9375rem;
+        }
+
+        .nav-list a:hover {
+            background-color: var(--bg-tertiary);
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-list a.active {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* Main Content Area */
+        main {
+            flex: 1;
+            padding: var(--spacing-xl);
+            max-width: var(--max-content-width);
+            min-width: 0;
+        }
+
+        /* Search and Filter Bar */
+        .controls-bar {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-container {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--spacing-md);
+            padding-left: 2.5rem;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: border-color var(--transition-speed);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: var(--spacing-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-hint {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: var(--spacing-sm);
+        }
+
+        /* Filter Section */
+        .filters-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .filter-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary-blue);
+        }
+
+        .filter-checkbox span {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        .controls-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            text-decoration: none;
+            min-height: 44px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-blue-dark);
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--neutral-200);
+            text-decoration: none;
+        }
+
+        .btn-small {
+            padding: 0.375rem var(--spacing-sm);
+            font-size: 0.875rem;
+            min-height: 36px;
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        /* Section Containers */
+        .content-section {
+            margin-bottom: var(--spacing-2xl);
+            scroll-margin-top: 100px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.875rem;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .section-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: all var(--transition-speed);
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-toggle:hover {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .section-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .section-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .section-description {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-lg);
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        /* Resource Cards Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        /* Resource Card */
+        .resource-card {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .resource-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .resource-card.hidden {
+            display: none;
+        }
+
+        .card-header {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .card-title a {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .card-title a:hover {
+            color: var(--primary-blue);
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem var(--spacing-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+
+        .badge-free {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+
+        .badge-paid {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .badge-freemium {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .badge-no-code {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+
+        .badge-low-code {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .badge-full-stack {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .badge-library {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .badge-academic {
+            background-color: #E0E7FF;
+            color: #3730A3;
+        }
+
+        .badge-quick-start {
+            background-color: #FCE7F3;
+            color: #831843;
+        }
+
+        .badge-framework {
+            background-color: #E0E7FF;
+            color: #3730A3;
+        }
+
+        .badge-new {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        [data-theme="dark"] .badge-free {
+            background-color: #065F46;
+            color: #D1FAE5;
+        }
+
+        [data-theme="dark"] .badge-paid {
+            background-color: #991B1B;
+            color: #FEE2E2;
+        }
+
+        [data-theme="dark"] .badge-freemium {
+            background-color: #92400E;
+            color: #FEF3C7;
+        }
+
+        [data-theme="dark"] .badge-no-code {
+            background-color: #065F46;
+            color: #D1FAE5;
+        }
+
+        [data-theme="dark"] .badge-low-code {
+            background-color: #92400E;
+            color: #FEF3C7;
+        }
+
+        [data-theme="dark"] .badge-full-stack {
+            background-color: #991B1B;
+            color: #FEE2E2;
+        }
+
+        [data-theme="dark"] .badge-library,
+        [data-theme="dark"] .badge-academic,
+        [data-theme="dark"] .badge-framework {
+            background-color: #1E40AF;
+            color: #DBEAFE;
+        }
+
+        [data-theme="dark"] .badge-quick-start {
+            background-color: #831843;
+            color: #FCE7F3;
+        }
+
+        [data-theme="dark"] .badge-new {
+            background-color: #92400E;
+            color: #FEF3C7;
+        }
+
+        .card-description {
+            flex: 1;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: var(--spacing-lg);
+            right: var(--spacing-lg);
+            background-color: var(--neutral-900);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s ease-out;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        [data-theme="dark"] .toast {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: var(--spacing-lg);
+            right: var(--spacing-lg);
+            background-color: var(--primary-blue);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transform: scale(0);
+            transition: all var(--transition-speed);
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-blue-dark);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .empty-state-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .empty-state-text {
+            font-size: 1rem;
+        }
+
+        /* Intro Section */
+        .intro-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white;
+            padding: var(--spacing-2xl);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .intro-section h1 {
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .intro-section p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+
+        @media (max-width: 1024px) {
+            aside {
+                position: fixed;
+                left: 0;
+                top: 72px;
+                transform: translateX(-100%);
+                z-index: 45;
+                box-shadow: var(--shadow-lg);
+            }
+
+            aside.mobile-open {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            main {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --spacing-xl: 1.5rem;
+                --spacing-2xl: 2rem;
+            }
+
+            .header-content {
+                padding: var(--spacing-sm) 0;
+            }
+
+            .header-title {
+                font-size: 1.25rem;
+            }
+
+            main {
+                padding: var(--spacing-md);
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-section {
+                flex-direction: column;
+            }
+
+            .filter-group {
+                min-width: 100%;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+
+            h1 { font-size: 1.75rem; }
+            h2 { font-size: 1.5rem; }
+
+            .intro-section {
+                padding: var(--spacing-lg);
+            }
+        }
+
+        /* ==================== PRINT STYLES ==================== */
+
+        @media print {
+            * {
+                background: white !important;
+                color: black !important;
+                box-shadow: none !important;
+            }
+
+            header,
+            aside,
+            .controls-bar,
+            .menu-toggle,
+            .theme-toggle,
+            .section-toggle,
+            .back-to-top,
+            .toast,
+            .btn {
+                display: none !important;
+            }
+
+            main {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+            }
+
+            .resource-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                border: 1px solid #ddd;
+                margin-bottom: 1rem;
+                padding: 1rem;
+            }
+
+            a[href]:after {
+                content: " (" attr(href) ")";
+                font-size: 0.875em;
+                color: #666;
+            }
+
+            .section-content {
+                max-height: none !important;
+                opacity: 1 !important;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+
+        /* ==================== ACCESSIBILITY ==================== */
+
+        /* Focus visible for keyboard navigation */
+        *:focus-visible {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header role="banner">
+        <div class="header-content">
+            <h1 class="header-title">RAG Resources for Libraries</h1>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                    <span id="themeIcon">🌙</span>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    ☰
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="layout-container">
+        <!-- Sidebar Navigation -->
+        <aside role="navigation" aria-label="Main navigation" id="sidebar">
+            <nav>
+                <div class="nav-section">
+                    <h3>Navigation</h3>
+                    <ul class="nav-list">
+                        <li><a href="#start-here">🏠 Start Here</a></li>
+                        <li><a href="#try-this-week">🎯 Try This Week</a></li>
+                        <li><a href="#library-examples">📚 Library Examples</a></li>
+                        <li><a href="#build-your-own">🛠️ Build Your Own</a></li>
+                        <li><a href="#evaluation">📊 Evaluation</a></li>
+                        <li><a href="#privacy-security">🔒 Privacy & Security</a></li>
+                        <li><a href="#research-papers">📖 Research & Learning</a></li>
+                        <li><a href="#costs-budget">💰 Costs & Budget</a></li>
+                        <li><a href="#community">🌐 Community</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" role="main">
+            <!-- Intro Section -->
+            <section class="intro-section">
+                <h1>RAG Resources for Libraries</h1>
+                <p>A comprehensive guide to Retrieval-Augmented Generation (RAG) tools, frameworks, and best practices for librarians and information professionals. From no-code quick starts to full-stack implementations.</p>
+            </section>
+
+            <!-- Search and Filter Controls -->
+            <div class="controls-bar" role="search">
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <span class="search-icon" aria-hidden="true">🔍</span>
+                        <input
+                            type="search"
+                            class="search-input"
+                            id="searchInput"
+                            placeholder="Search resources..."
+                            aria-label="Search all resources"
+                        >
+                    </div>
+                    <p class="search-hint">Press <kbd>/</kbd> to focus search, <kbd>Esc</kbd> to clear</p>
+                </div>
+
+                <div class="filters-section">
+                    <div class="filter-group">
+                        <label id="experience-label">Experience Level</label>
+                        <div class="filter-options" role="group" aria-labelledby="experience-label">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="no-code" data-filter="experience">
+                                <span>🟢 No-Code</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="low-code" data-filter="experience">
+                                <span>🟡 Low-Code</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="full-stack" data-filter="experience">
+                                <span>🔴 Full-Stack</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label id="cost-label">Cost</label>
+                        <div class="filter-options" role="group" aria-labelledby="cost-label">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="free" data-filter="cost">
+                                <span>🆓 Free</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="paid" data-filter="cost">
+                                <span>💰 Paid</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="freemium" data-filter="cost">
+                                <span>💰💰 Freemium</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label id="type-label">Type</label>
+                        <div class="filter-options" role="group" aria-labelledby="type-label">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="library" data-filter="type">
+                                <span>📚 Library</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="academic" data-filter="type">
+                                <span>🎓 Academic</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="quick-start" data-filter="type">
+                                <span>⚡ Quick-Start</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="framework" data-filter="type">
+                                <span>🔧 Framework</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls-actions">
+                    <button class="btn btn-secondary btn-small" id="clearFilters">Clear Filters</button>
+                    <button class="btn btn-secondary btn-small" id="expandAll">Expand All</button>
+                    <button class="btn btn-secondary btn-small" id="collapseAll">Collapse All</button>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <!-- Start Here Section -->
+            <section class="content-section" id="start-here">
+                <div class="section-header">
+                    <h2 class="section-title">🏠 Start Here</h2>
+                    <button class="section-toggle" aria-label="Toggle section" data-section="start-here">
+                        <span aria-hidden="true">−</span>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="section-description">
+                        <p><strong>New to RAG?</strong> Start with the essential framework that defines AI competencies for library professionals. This is your foundation for understanding how AI and RAG fit into library work.</p>
+                    </div>
+                    <div class="resources-grid" data-section="start-here"></div>
+                </div>
+            </section>
+
+            <!-- Try This Week Section -->
+            <section class="content-section" id="try-this-week">
+                <div class="section-header">
+                    <h2 class="section-title">🎯 Try This Week</h2>
+                    <button class="section-toggle" aria-label="Toggle section" data-section="try-this-week">
+                        <span aria-hidden="true">−</span>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="section-description">
+                        <p><strong>Ready to experiment?</strong> These no-code tools let you experience RAG in minutes. Perfect for understanding the concepts before committing to a full implementation.</p>
+                    </div>
+                    <div class="resources-grid" data-section="try-this-week"></div>
+                </div>
+            </section>
+
+            <!-- Library Examples Section -->
+            <section class="content-section" id="library-examples">
+                <div class="section-header">
+                    <h2 class="section-title">📚 Library Examples</h2>
+                    <button class="section-toggle" aria-label="Toggle section" data-section="library-examples">
+                        <span aria-hidden="true">−</span>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="section-description">
+                        <p><strong>Learn from peers.</strong> Real library implementations, complete with tech stacks, costs, and lessons learned. See how other libraries have successfully deployed RAG systems.</p>
+                    </div>
+                    <div class="resources-grid" data-section="library-examples"></div>
+                </div>
+            </section>
+
+            <!-- Build Your Own Section -->
+            <section class="content-section" id="build-your-own">
+                <div class="section-header">
+                    <h2 class="section-title">🛠️ Build Your Own</h2>
+                    <button class="section-toggle" aria-label="Toggle section" data-section="build-your-own">
+                        <span aria-hidden="true">−</span>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="section-description">
+                        <p><strong>Ready to build?</strong> Frameworks, vector databases, and LLMs for creating your own RAG system. From weekend projects to production-ready systems.</p>
+                    </div>
+                    <div class="resources-grid" data-section="build-your-own"></div>
+                </div>
+            </section>
+
+            <!-- Evaluation Section -->
+            <section class="content-section" id="evaluation">
+                <div class="section-header">
+                    <h2 class="section-title">📊 Evaluation</h2>
+                    <button class="section-toggle" aria-label="Toggle section" data-section="evaluation">
+                        <span aria-hidden="true">−</span>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="section-description">
+                        <p><strong>Measure what matters.</strong> Standards, frameworks, and methodologies for evaluating RAG systems. Ensure your implementation meets professional and technical requirements.</p>
+                    </div>
+                    <div class="resources-grid" data-section="evaluation"></div>
+                </div>
+            </section>
+
+            <!-- Privacy & Security Section -->
+            <section class="content-section" id="privacy-security">
+                <div class="section-header">
+                    <h2 class="section-title">🔒 Privacy & Security</h2>
+                    <button class="section-toggle" aria-label="Toggle section" data-section="privacy-security">
+                        <span aria-hidden="true">−</span>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="section-description">
+                        <p><strong>Protect patron privacy.</strong> Essential resources for understanding privacy implications, security concerns, and ethical considerations when implementing AI in libraries.</p>
+                    </div>
+                    <div class="resources-grid" data-section="privacy-security"></div>
+                </div>
+            </section>
+
+            <!-- Research & Learning Section -->
+            <section class="content-section" id="research-papers">
+                <div class="section-header">
+                    <h2 class="section-title">📖 Research & Learning</h2>
+                    <button class="section-toggle" aria-label="Toggle section" data-section="research-papers">
+                        <span aria-hidden="true">−</span>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="section-description">
+                        <p><strong>Deepen your knowledge.</strong> Research papers, tutorials, and learning resources from library professionals and technical experts. Stay current with latest developments.</p>
+                    </div>
+                    <div class="resources-grid" data-section="research-papers"></div>
+                </div>
+            </section>
+
+            <!-- Costs & Budget Section -->
+            <section class="content-section" id="costs-budget">
+                <div class="section-header">
+                    <h2 class="section-title">💰 Costs & Budget</h2>
+                    <button class="section-toggle" aria-label="Toggle section" data-section="costs-budget">
+                        <span aria-hidden="true">−</span>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="section-description">
+                        <p><strong>Plan your budget.</strong> Realistic cost information from working implementations. Understand the true costs before you commit.</p>
+                    </div>
+                    <div class="resources-grid" data-section="costs-budget"></div>
+                </div>
+            </section>
+
+            <!-- Community Section -->
+            <section class="content-section" id="community">
+                <div class="section-header">
+                    <h2 class="section-title">🌐 Community</h2>
+                    <button class="section-toggle" aria-label="Toggle section" data-section="community">
+                        <span aria-hidden="true">−</span>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="section-description">
+                        <p><strong>Connect with others.</strong> LibGuides from peer institutions and community resources. See how other libraries are organizing and presenting AI/RAG information.</p>
+                    </div>
+                    <div class="resources-grid" data-section="community"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        ↑
+    </button>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript -->
+    <script>
+        // ==================== DATA STRUCTURE ====================
+        // Edit this array to add, remove, or modify resources
+
+        const resources = [
+            // Start Here
+            {
+                title: "ACRL AI Competencies for Academic Library Workers",
+                url: "https://www.ala.org/acrl/standards/ai",
+                description: "The essential framework approved October 2025 defining four core competency areas: Ethical Considerations, Knowledge & Understanding, Analysis & Evaluation, and Use & Application. Your foundation for understanding AI in libraries.",
+                badges: ["free", "no-code", "academic", "library"],
+                category: "start-here"
+            },
+
+            // Try This Week - No Code Tools
+            {
+                title: "NotebookLM",
+                url: "https://notebooklm.google.com/",
+                description: "Google's free RAG tool. Upload up to 50 sources (PDFs, Google Docs, websites, audio), ask questions, get cited answers. Generates study guides, timelines, FAQs, and podcast-style summaries. Data not used for model training.",
+                badges: ["free", "no-code", "quick-start"],
+                category: "try-this-week",
+                additionalLinks: [
+                    { text: "Beginner's Guide", url: "https://blog.google/technology/ai/notebooklm-beginner-tips/" },
+                    { text: "DataCamp Tutorial", url: "https://www.datacamp.com/tutorial/notebooklm" }
+                ]
+            },
+            {
+                title: "ChatGPT with PDF Upload",
+                url: "https://chat.openai.com/",
+                description: "Free tier allows 3 PDFs per day. Demonstrates basic RAG pattern with source citations. Great for understanding the concept before building your own.",
+                badges: ["freemium", "no-code", "quick-start"],
+                category: "try-this-week"
+            },
+            {
+                title: "Perplexity AI",
+                url: "https://www.perplexity.ai/",
+                description: "Web-based RAG system with live citations in clean interface. See RAG in action on real-time web content.",
+                badges: ["freemium", "no-code", "quick-start"],
+                category: "try-this-week"
+            },
+
+            // Library Examples
+            {
+                title: "KingbotGPT (San José State University)",
+                url: "https://library.sjsu.edu/kingbot/",
+                description: "Production RAG chatbot launched September 2024. Tech: LlamaIndex, OpenAI GPT-4o-mini, ChromaDB, Streamlit. Open source code available. Monthly costs: $20-40. See the ACRL 2025 paper for implementation details.",
+                badges: ["paid", "full-stack", "library", "academic"],
+                category: "library-examples",
+                additionalLinks: [
+                    { text: "ACRL 2025 Paper", url: "https://www.ala.org/acrl/conferences/acrl2025" }
+                ]
+            },
+            {
+                title: "T-Rex Chatbot (University of Calgary)",
+                url: "https://library.ucalgary.ca/",
+                description: "Launched August 2021 using Ivy.ai RAG + LLMs. Answers ~50% of questions at 4/5 rating or higher. WCAG 2.1 AA compliant. Supports 100+ languages. Read the OCLC Research article for insights.",
+                badges: ["paid", "no-code", "library", "academic"],
+                category: "library-examples",
+                additionalLinks: [
+                    { text: "OCLC Research Article (Nov 2024)", url: "https://www.oclc.org/research/" }
+                ]
+            },
+            {
+                title: "Vendor Discovery Systems with RAG",
+                url: "https://www.exlibrisgroup.com/",
+                description: "Ex Libris Primo Research Assistant (Sept 2024), ProQuest Summon Research Assistant (March 2025), EBSCO AI Insights (March 2025). Commercial solutions integrated into existing library systems.",
+                badges: ["paid", "no-code", "library"],
+                category: "library-examples"
+            },
+
+            // Build Your Own - Frameworks
+            {
+                title: "LlamaIndex",
+                url: "https://www.llamaindex.ai/",
+                description: "🆕 RECOMMENDED for beginners. Purpose-built Python framework for RAG with excellent documentation. Used by SJSU KingbotGPT. Start with their tutorial for a working example in under an hour.",
+                badges: ["free", "low-code", "framework", "new"],
+                category: "build-your-own",
+                additionalLinks: [
+                    { text: "Getting Started Tutorial", url: "https://docs.llamaindex.ai/en/stable/getting_started/starter_example.html" }
+                ]
+            },
+            {
+                title: "LangChain",
+                url: "https://www.langchain.com/",
+                description: "General-purpose LLM orchestration framework with larger ecosystem. More complex than LlamaIndex but more flexible for advanced use cases.",
+                badges: ["free", "low-code", "framework"],
+                category: "build-your-own",
+                additionalLinks: [
+                    { text: "RAG Tutorial", url: "https://python.langchain.com/docs/tutorials/rag/" }
+                ]
+            },
+            {
+                title: "Streamlit",
+                url: "https://streamlit.io/",
+                description: "Python-based UI framework for building web interfaces. Free Community Cloud hosting. Used by KingbotGPT for the chatbot interface. Turn your Python RAG script into a web app.",
+                badges: ["free", "low-code", "framework"],
+                category: "build-your-own"
+            },
+            {
+                title: "Presentation Demo Materials",
+                url: "https://github.com/radio-shaq/Lyrasis-slides-11-2025",
+                description: "Working Google Colab notebook and sample FAQ template from the Lyrasis presentation. Clone and experiment in your browser.",
+                badges: ["free", "low-code", "quick-start"],
+                category: "build-your-own"
+            },
+
+            // Build Your Own - Vector Databases
+            {
+                title: "ChromaDB",
+                url: "https://www.trychroma.com/",
+                description: "Embedded vector database, no separate server required. Free forever. Used in presentation demo and KingbotGPT. Perfect for getting started.",
+                badges: ["free", "low-code", "framework"],
+                category: "build-your-own"
+            },
+            {
+                title: "PostgreSQL pgvector",
+                url: "https://www.enterprisedb.com/blog/rag-app-postgres-and-pgvector",
+                description: "🆕 Major 2024 development: adds vector search to PostgreSQL. Reduces infrastructure complexity for institutions already running PostgreSQL. No new database to learn or maintain.",
+                badges: ["free", "full-stack", "framework", "new"],
+                category: "build-your-own"
+            },
+            {
+                title: "Pinecone",
+                url: "https://www.pinecone.io/",
+                description: "Production-grade vector database. Free tier: 100k vectors. Starter: $70/month for 5M vectors. Managed service removes operational complexity.",
+                badges: ["freemium", "low-code", "framework"],
+                category: "build-your-own"
+            },
+            {
+                title: "Weaviate / Qdrant / FAISS",
+                url: "https://weaviate.io/",
+                description: "All open-source vector databases with free tiers for cloud versions. Production-ready options with different strengths. Research which fits your infrastructure.",
+                badges: ["free", "full-stack", "framework"],
+                category: "build-your-own"
+            },
+
+            // Build Your Own - LLMs
+            {
+                title: "OpenAI API (GPT-4o-mini)",
+                url: "https://platform.openai.com/",
+                description: "Most popular choice for RAG. GPT-4o-mini costs: $0.15 per 1M input tokens, $0.60 per 1M output tokens. Reality check: ~1000 queries/month = ~$0.60. Used by KingbotGPT.",
+                badges: ["paid", "low-code"],
+                category: "build-your-own"
+            },
+            {
+                title: "Anthropic Claude API",
+                url: "https://www.anthropic.com/api",
+                description: "Claude 3.5 Haiku with strong context windows (200k+ tokens). Similar pricing to OpenAI. Excellent for long documents and complex reasoning.",
+                badges: ["paid", "low-code"],
+                category: "build-your-own"
+            },
+            {
+                title: "Ollama",
+                url: "https://ollama.ai/",
+                description: "Run Llama, Mistral, Phi locally on your server. Privacy-focused: everything stays on your hardware. Free to use. Performance depends on your hardware.",
+                badges: ["free", "full-stack"],
+                category: "build-your-own"
+            },
+            {
+                title: "Llama 3.2 & 3.3",
+                url: "https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/",
+                description: "Meta's latest open models enabling on-premise privacy-preserving RAG. Lightweight models (1B, 3B) run on standard library hardware. Vision models (11B, 90B) for multimodal RAG with images.",
+                badges: ["free", "full-stack", "new"],
+                category: "build-your-own"
+            },
+
+            // Build Your Own - Advanced
+            {
+                title: "GraphRAG (Microsoft)",
+                url: "https://www.microsoft.com/en-us/research/project/graphrag/",
+                description: "🆕 GAME-CHANGER: October 2024 release shows 70-80% improvement over standard RAG for complex questions. Exceptional for special collections, archives, and complex document relationships. GitHub code available.",
+                badges: ["free", "full-stack", "framework", "new"],
+                category: "build-your-own",
+                additionalLinks: [
+                    { text: "GitHub Repository", url: "https://github.com/microsoft/graphrag" },
+                    { text: "Research Blog", url: "https://www.microsoft.com/en-us/research/blog/graphrag-new-tool-for-complex-data-discovery-now-on-github/" }
+                ]
+            },
+
+            // Evaluation
+            {
+                title: "NIST AI Standards",
+                url: "https://www.nist.gov/artificial-intelligence",
+                description: "National Institute of Standards and Technology AI risk management framework. Referenced in academic library evaluation approaches.",
+                badges: ["free", "no-code", "academic"],
+                category: "evaluation"
+            },
+            {
+                title: "OWASP LLM Top 10",
+                url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+                description: "Security risks for LLM applications including prompt injection, data poisoning, and more. Essential reading before deploying to production.",
+                badges: ["free", "no-code", "academic"],
+                category: "evaluation"
+            },
+
+            // Privacy & Security
+            {
+                title: "ALA Library Privacy Checklist",
+                url: "https://www.ala.org/advocacy/privacy/checklists/overview",
+                description: "Three-tier priority system with immediate actionable steps. Essential for any library considering AI/RAG implementation. Address privacy from day one.",
+                badges: ["free", "no-code", "library"],
+                category: "privacy-security"
+            },
+            {
+                title: "Knowledge Trade with Haves and Have-Nots",
+                url: "https://crln.acrl.org/index.php/crlnews/article/view/25868",
+                description: "Cox & Tzoc (2023) on knowledge equity and AI. Critical reading for understanding ethical implications of AI in libraries and information access disparities.",
+                badges: ["free", "no-code", "academic", "library"],
+                category: "privacy-security"
+            },
+
+            // Research & Learning
+            {
+                title: "Aaron Tay's Blog",
+                url: "https://musingsaboutlibrarianship.blogspot.com/",
+                description: "Systems librarian widely followed for practical insights on library technology and AI. Regular coverage of RAG, vendor implementations, and critical analysis including guardrail issues.",
+                badges: ["free", "no-code", "library"],
+                category: "research-papers"
+            },
+            {
+                title: "Lyrasis November 2025 RAG Resources",
+                url: "https://github.com/drmein/Lyrasis-November-2025-RAG-and-Libraries",
+                description: "Complete presentation materials, decision matrices, vendor evaluation checklists, and working examples. Comprehensive resource covering all aspects of RAG for libraries.",
+                badges: ["free", "no-code", "library", "quick-start"],
+                category: "research-papers"
+            },
+
+            // Costs & Budget
+            {
+                title: "SJSU KingbotGPT Cost Reality",
+                url: "https://library.sjsu.edu/kingbot/",
+                description: "Real-world production costs: $20-40/month for API usage. Includes actual usage patterns and budget planning insights from a working library implementation.",
+                badges: ["free", "no-code", "library"],
+                category: "costs-budget"
+            },
+
+            // Community - Peer LibGuides
+            {
+                title: "Ohio State Lima - AI LibGuide",
+                url: "https://osu.libguides.com/lima_ai",
+                description: "Explains RAG in plain language with citation guidance. Great example of making technical concepts accessible to library users.",
+                badges: ["free", "no-code", "library", "academic"],
+                category: "community"
+            },
+            {
+                title: "Florida International University - AI + ACRL",
+                url: "https://library.fiu.edu/AI-ACRL/intro",
+                description: "Maps AI tools to ACRL Framework for Information Literacy. Shows how to integrate AI/RAG into existing information literacy instruction.",
+                badges: ["free", "no-code", "library", "academic"],
+                category: "community"
+            },
+            {
+                title: "University of Alaska Southeast - AI",
+                url: "https://uas.alaska.libguides.com/ai",
+                description: "Uses industry standards (NIST, IBM, NVIDIA) with comprehensive glossary. Technical approach suitable for STEM-focused institutions.",
+                badges: ["free", "no-code", "library", "academic"],
+                category: "community"
+            }
+        ];
+
+        // ==================== STATE MANAGEMENT ====================
+
+        let activeFilters = {
+            experience: [],
+            cost: [],
+            type: []
+        };
+
+        let searchQuery = '';
+
+        // ==================== INITIALIZATION ====================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTheme();
+            renderResources();
+            setupEventListeners();
+            loadSavedState();
+            updateActiveNavLink();
+        });
+
+        // ==================== THEME MANAGEMENT ====================
+
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                updateThemeIcon('dark');
+            } else {
+                updateThemeIcon('light');
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // ==================== RENDER RESOURCES ====================
+
+        function renderResources() {
+            // Get all section containers
+            const sections = {
+                'start-here': document.querySelector('[data-section="start-here"]'),
+                'try-this-week': document.querySelector('[data-section="try-this-week"]'),
+                'library-examples': document.querySelector('[data-section="library-examples"]'),
+                'build-your-own': document.querySelector('[data-section="build-your-own"]'),
+                'evaluation': document.querySelector('[data-section="evaluation"]'),
+                'privacy-security': document.querySelector('[data-section="privacy-security"]'),
+                'research-papers': document.querySelector('[data-section="research-papers"]'),
+                'costs-budget': document.querySelector('[data-section="costs-budget"]'),
+                'community': document.querySelector('[data-section="community"]')
+            };
+
+            // Clear all sections
+            Object.values(sections).forEach(section => {
+                if (section) section.innerHTML = '';
+            });
+
+            // Render each resource to its section
+            resources.forEach((resource, index) => {
+                const section = sections[resource.category];
+                if (section) {
+                    section.appendChild(createResourceCard(resource, index));
+                }
+            });
+        }
+
+        function createResourceCard(resource, index) {
+            const article = document.createElement('article');
+            article.className = 'resource-card';
+            article.setAttribute('data-badges', resource.badges.join(' '));
+            article.setAttribute('data-category', resource.category);
+            article.setAttribute('data-index', index);
+
+            const badgesHTML = resource.badges.map(badge => {
+                const badgeText = getBadgeText(badge);
+                return `<span class="badge badge-${badge}">${badgeText}</span>`;
+            }).join('');
+
+            const additionalLinksHTML = resource.additionalLinks
+                ? resource.additionalLinks.map(link =>
+                    `<a href="${link.url}" class="btn btn-secondary btn-small" target="_blank" rel="noopener">${link.text}</a>`
+                  ).join('')
+                : '';
+
+            article.innerHTML = `
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <a href="${resource.url}" target="_blank" rel="noopener">
+                            ${resource.title}
+                        </a>
+                    </h3>
+                    <div class="badges">${badgesHTML}</div>
+                </div>
+                <p class="card-description">${resource.description}</p>
+                <div class="card-actions">
+                    <a href="${resource.url}" class="btn btn-primary btn-small" target="_blank" rel="noopener">
+                        Visit Site
+                    </a>
+                    <button class="btn btn-secondary btn-small" onclick="copyToClipboard('${resource.url}', '${escapeHtml(resource.title)}')" title="Copy link to clipboard">
+                        Copy Link
+                    </button>
+                    ${additionalLinksHTML}
+                </div>
+            `;
+
+            return article;
+        }
+
+        function getBadgeText(badge) {
+            const badgeMap = {
+                'free': '🆓 Free',
+                'paid': '💰 Paid',
+                'freemium': '💰💰 Freemium',
+                'no-code': '🟢 No-Code',
+                'low-code': '🟡 Low-Code',
+                'full-stack': '🔴 Full-Stack',
+                'library': '📚 Library',
+                'academic': '🎓 Academic',
+                'quick-start': '⚡ Quick-Start',
+                'framework': '🔧 Framework',
+                'new': '✨ New'
+            };
+            return badgeMap[badge] || badge;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/'/g, "\\'");
+        }
+
+        // ==================== FILTERING & SEARCH ====================
+
+        function applyFiltersAndSearch() {
+            const cards = document.querySelectorAll('.resource-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const matchesFilters = checkFilters(card);
+                const matchesSearch = checkSearch(card);
+
+                if (matchesFilters && matchesSearch) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Show empty state if no results
+            updateEmptyStates(visibleCount);
+        }
+
+        function checkFilters(card) {
+            const cardBadges = card.getAttribute('data-badges').split(' ');
+
+            // If no filters are active, show all
+            const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
+            if (!hasActiveFilters) return true;
+
+            // Check each filter category
+            for (const [category, values] of Object.entries(activeFilters)) {
+                if (values.length > 0) {
+                    const hasMatch = values.some(value => cardBadges.includes(value));
+                    if (!hasMatch) return false;
+                }
+            }
+
+            return true;
+        }
+
+        function checkSearch(card) {
+            if (!searchQuery) return true;
+
+            const index = parseInt(card.getAttribute('data-index'));
+            const resource = resources[index];
+
+            const searchText = [
+                resource.title,
+                resource.description,
+                resource.url,
+                ...resource.badges
+            ].join(' ').toLowerCase();
+
+            return searchText.includes(searchQuery.toLowerCase());
+        }
+
+        function updateEmptyStates(visibleCount) {
+            const sections = document.querySelectorAll('.content-section');
+
+            sections.forEach(section => {
+                const grid = section.querySelector('.resources-grid');
+                const visibleCards = grid.querySelectorAll('.resource-card:not(.hidden)');
+
+                // Remove existing empty state
+                const existingEmptyState = grid.querySelector('.empty-state');
+                if (existingEmptyState) {
+                    existingEmptyState.remove();
+                }
+
+                // Add empty state if no visible cards
+                if (visibleCards.length === 0) {
+                    const emptyState = document.createElement('div');
+                    emptyState.className = 'empty-state';
+                    emptyState.innerHTML = `
+                        <div class="empty-state-icon">🔍</div>
+                        <h3 class="empty-state-title">No resources found</h3>
+                        <p class="empty-state-text">Try adjusting your filters or search query</p>
+                    `;
+                    grid.appendChild(emptyState);
+                }
+            });
+        }
+
+        // ==================== EVENT LISTENERS ====================
+
+        function setupEventListeners() {
+            // Theme toggle
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('mobile-open');
+                const isOpen = sidebar.classList.contains('mobile-open');
+                menuToggle.setAttribute('aria-expanded', isOpen);
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 1024) {
+                    if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                        sidebar.classList.remove('mobile-open');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // Close sidebar when clicking nav link on mobile
+            document.querySelectorAll('.nav-list a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 1024) {
+                        sidebar.classList.remove('mobile-open');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+
+            // Search input
+            const searchInput = document.getElementById('searchInput');
+            let searchTimeout;
+
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    searchQuery = e.target.value;
+                    applyFiltersAndSearch();
+                    saveState();
+                }, 300); // Debounce search
+            });
+
+            // Keyboard shortcut for search
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+                if (e.key === 'Escape' && document.activeElement === searchInput) {
+                    searchInput.value = '';
+                    searchQuery = '';
+                    applyFiltersAndSearch();
+                    saveState();
+                }
+            });
+
+            // Filter checkboxes
+            document.querySelectorAll('input[data-filter]').forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    const filterType = e.target.getAttribute('data-filter');
+                    const value = e.target.value;
+
+                    if (e.target.checked) {
+                        activeFilters[filterType].push(value);
+                    } else {
+                        activeFilters[filterType] = activeFilters[filterType].filter(v => v !== value);
+                    }
+
+                    applyFiltersAndSearch();
+                    saveState();
+                });
+            });
+
+            // Clear filters button
+            document.getElementById('clearFilters').addEventListener('click', () => {
+                // Clear all filters
+                activeFilters = {
+                    experience: [],
+                    cost: [],
+                    type: []
+                };
+
+                // Uncheck all checkboxes
+                document.querySelectorAll('input[data-filter]').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+
+                // Clear search
+                searchInput.value = '';
+                searchQuery = '';
+
+                applyFiltersAndSearch();
+                saveState();
+            });
+
+            // Section toggles
+            document.querySelectorAll('.section-toggle').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const sectionId = e.currentTarget.getAttribute('data-section');
+                    toggleSection(sectionId);
+                });
+            });
+
+            // Expand/Collapse all buttons
+            document.getElementById('expandAll').addEventListener('click', () => {
+                document.querySelectorAll('.section-content').forEach(content => {
+                    content.classList.remove('collapsed');
+                    const toggle = content.previousElementSibling.querySelector('.section-toggle span');
+                    if (toggle) toggle.textContent = '−';
+                });
+                saveCollapsedSections();
+            });
+
+            document.getElementById('collapseAll').addEventListener('click', () => {
+                document.querySelectorAll('.section-content').forEach(content => {
+                    content.classList.add('collapsed');
+                    const toggle = content.previousElementSibling.querySelector('.section-toggle span');
+                    if (toggle) toggle.textContent = '+';
+                });
+                saveCollapsedSections();
+            });
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Update active nav link on scroll
+            window.addEventListener('scroll', updateActiveNavLink);
+        }
+
+        // ==================== SECTION COLLAPSE ====================
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const content = section.querySelector('.section-content');
+            const toggle = section.querySelector('.section-toggle span');
+
+            content.classList.toggle('collapsed');
+            toggle.textContent = content.classList.contains('collapsed') ? '+' : '−';
+
+            saveCollapsedSections();
+        }
+
+        function saveCollapsedSections() {
+            const collapsed = [];
+            document.querySelectorAll('.section-content.collapsed').forEach(content => {
+                const section = content.closest('.content-section');
+                collapsed.push(section.id);
+            });
+            localStorage.setItem('collapsedSections', JSON.stringify(collapsed));
+        }
+
+        function loadCollapsedSections() {
+            const collapsed = JSON.parse(localStorage.getItem('collapsedSections') || '[]');
+            collapsed.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const content = section.querySelector('.section-content');
+                    const toggle = section.querySelector('.section-toggle span');
+                    content.classList.add('collapsed');
+                    if (toggle) toggle.textContent = '+';
+                }
+            });
+        }
+
+        // ==================== STATE PERSISTENCE ====================
+
+        function saveState() {
+            localStorage.setItem('activeFilters', JSON.stringify(activeFilters));
+            localStorage.setItem('searchQuery', searchQuery);
+        }
+
+        function loadSavedState() {
+            // Load filters
+            const savedFilters = localStorage.getItem('activeFilters');
+            if (savedFilters) {
+                activeFilters = JSON.parse(savedFilters);
+
+                // Check the appropriate checkboxes
+                Object.entries(activeFilters).forEach(([filterType, values]) => {
+                    values.forEach(value => {
+                        const checkbox = document.querySelector(`input[data-filter="${filterType}"][value="${value}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                });
+            }
+
+            // Load search query
+            const savedSearch = localStorage.getItem('searchQuery');
+            if (savedSearch) {
+                searchQuery = savedSearch;
+                document.getElementById('searchInput').value = savedSearch;
+            }
+
+            // Load collapsed sections
+            loadCollapsedSections();
+
+            // Apply filters and search
+            applyFiltersAndSearch();
+        }
+
+        // ==================== NAVIGATION ====================
+
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.nav-list a');
+
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionBottom = sectionTop + section.offsetHeight;
+
+                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionBottom) {
+                    currentSection = section.id;
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // ==================== COPY TO CLIPBOARD ====================
+
+        function copyToClipboard(url, title) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast(`Copied: ${title}`);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = url;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast(`Copied: ${title}`);
+            });
+        }
+
+        // Make copyToClipboard available globally
+        window.copyToClipboard = copyToClipboard;
+
+        // ==================== TOAST NOTIFICATIONS ====================
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
