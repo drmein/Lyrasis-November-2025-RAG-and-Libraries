@@ -1,772 +1,855 @@
-# Supplemental Resources for RAG in Libraries 
+# Supplemental Resources: RAG for Libraries
 
 **Companion to LYRASIS Presentation: "Giving AI Access to Library Knowledge"**
-**David Meincke, MSLS | Johnson Wales University | November 2025**
+**David Meincke, MSLS | Johnson & Wales University | November 2025**
 
 ---
 
-## About This Document
+## 📖 What Is This?
 
-This is your take-home resource guide for exploring RAG (Retrieval-Augmented Generation) in library contexts. Resources are organized by type and include both free/open-source and commercial options across the full spectrum from no-code tools to production frameworks.
+**TLDR:** A curated guide to help librarians explore, evaluate, and implement RAG (Retrieval-Augmented Generation) systems. Organized for library professionals of all technical levels, from "never coded" to "systems librarian."
+
+**What's RAG?** Think of it as "open-book exam for AI." Instead of relying on training data alone, RAG systems retrieve YOUR documents (policies, FAQs, catalogs) and cite them when answering questions. This makes AI outputs more grounded, verifiable, and tied to your actual library knowledge.
+
+**Here's the thing:** You already have RAG expertise. Source evaluation, cataloging, reference work—these skills map directly to RAG evaluation. This guide helps you apply what you already know to a new tool.
 
 **Key:**
 - 🆓 Free/Open Source
-- 💰 Paid/Commercial
+- 💰 Paid/Commercial (with free tiers noted)
 - 📚 Library-Specific
 - 🎓 Academic/Peer-Reviewed
 - ⚡ Quick Start (try today)
 
 ---
 
-## 1. Try This Week (No-Code Tools)
+## ⭐ Try This Afternoon (No Code Required)
 
-Start here if you want to experiment immediately without writing code.
+Start here if you want to *experience* RAG right now, no technical skills needed.
 
-### General RAG Tools
+### 🟢 NotebookLM (Google's Free RAG Tool)
 
-- **🆓⚡ NotebookLM** (Google)
-  https://notebooklm.google.com/
-  Upload documents, ask questions, get cited answers. Great for understanding RAG UX patterns. **Free tier remains (50 sources/notebook); paid tiers added in 2025.**
+**URL:** https://notebooklm.google.com/
+**Why start here:** Upload your library's FAQ PDF, ask it questions, watch it cite sources. This is RAG in action. Free, never used to train models.
 
-- **💰⚡ ChatGPT** (OpenAI)
-  https://chat.openai.com/
-  Upload PDFs in chat, watch it retrieve and cite. **Free tier now supports PDF upload (3 per day) - recent 2025 update.**
+**What it does:**
+- Upload up to 50 sources per notebook (PDFs, Google Docs, websites, audio)
+- Ask questions → get answers with citations
+- Generate study guides, timelines, FAQs
+- Create podcast-style audio summaries
+- Share notebooks with colleagues
 
-- **💰⚡ Claude Projects** (Anthropic)
-  https://claude.ai/
-  Add documents as project knowledge base. Free tier available.
+**Privacy note:** Google states your data isn't used for model training. Still, don't upload confidential patron data.
 
-- **🆓⚡ Perplexity AI**
-  https://www.perplexity.ai/
-  Web search + RAG with source cards. Good example of citation UX.
+**Real library use case:** Upload your library policy manual. Ask "What's our laptop checkout policy?" Watch it cite the exact section. Now you understand RAG.
 
-### Custom Chatbot Builders (No-Code)
+**Tutorials:**
+- Official Google Guide: https://blog.google/technology/ai/notebooklm-beginner-tips/
+- DataCamp Tutorial: https://www.datacamp.com/tutorial/notebooklm
 
-- **💰 CustomGPT.ai**
-  https://customgpt.ai/
-  Build chatbots from your content without coding. Library use cases documented.
+### 🟢 ChatGPT with PDF Upload
 
-- **💰 Chatbase**
-  https://www.chatbase.co/
-  Train chatbots on your documents. Pricing starts free tier.
+**URL:** https://chat.openai.com/
+**Free tier:** 3 PDFs per day (as of 2025)
+**Why try it:** Upload a document, ask questions, notice the citations. That's RAG.
 
-- **💰 Voiceflow**
-  https://www.voiceflow.com/
-  Conversational AI platform with RAG support. Visual workflow builder.
+**Limitation:** Smaller context than NotebookLM, no persistent knowledge base. But good for understanding the basic pattern: retrieve → cite → generate.
 
----
+### 🟢 Perplexity AI
 
-## 2. Library RAG Systems in Production
+**URL:** https://www.perplexity.ai/
+**Why it's useful:** Web-based RAG with live citations. Good for seeing how source cards work in a clean interface.
 
-Real-world implementations from peer institutions and vendors.
-
-### Academic Library Chatbots
-
-- **📚🆓 KingbotGPT** (San José State University)
-  https://library.sjsu.edu/kingbot
-  **Live demo:** https://libapps.sjsu.edu/kingbot/
-  **Tech stack:** LlamaIndex, GPT-4o Mini, Chroma, Streamlit
-  **Blog post:** "Library-Led AI: Building a Library Chatbot" (ALA 2025)
-  https://www.ala.org/sites/default/files/2025-03/Library-LedAI.pdf
-
-- **📚 T-Rex Chatbot** (University of Calgary)
-  https://library.ucalgary.ca/
-  **Article:** "Implementing an AI Reference Chatbot at University of Calgary Library" (OCLC Research, Nov 2024)
-  https://hangingtogether.org/implementing-an-ai-reference-chatbot-at-the-university-of-calgary-library/
-
-- **📚 Columbia CLIO AI Enhancement** (Columbia University)
-  **Announcement:** "Augmenting Discovery with AI" (May 2024)
-  https://etc.cuit.columbia.edu/news/AICoP-library-augment-discovery-with-AI
-  Pilot project using document vectorization for discovery enhancement.
-
-### Discovery Layers with RAG
-
-- **📚💰 Ex Libris Primo Research Assistant** (Clarivate)
-  **Launch:** September 2024
-  **Press release:** https://clarivate.com/news/clarivate-launches-generative-ai-powered-primo-research-assistant/
-  RAG grounded in 5+ billion CDI records.
-
-- **📚💰 ProQuest Summon Research Assistant** (Clarivate)
-  **Launch:** March 2025
-  **Announcement:** https://librarytechnology.org/pr/31135
-  Based on Ex Libris RAG architecture.
-
-- **📚💰 EBSCO AI Insights**
-  **Launch:** March 2025
-  **Press release:** https://www.ebsco.com/news-center/press-releases/ebsco-information-services-launches-newest-artificial-intelligence-features/
-  RAG grounded on full-text articles.
-
-### Database Platforms with RAG
-
-- **📚💰 JSTOR AI Research Tool**
-  **Beta:** August 2023 (ongoing)
-  **Blog post:** "AI and Other Advanced Technologies on JSTOR: What We're Learning" (June 2024)
-  https://about.jstor.org/blog/ai-and-other-advanced-technologies-on-jstor-what-were-learning/
-
-- **📚💰 Statista Research AI**
-  https://www.statista.com/research-ai/
-  Cohere embeddings + Claude 3 Sonnet for statistics research.
-
-- **📚💰 ProQuest Research Assistant**
-  **Blog post:** "Academic AI-Powered Research Assistance Now Available" (Feb 2025)
-  https://about.proquest.com/en/blog/2025/academic-ai-powered-research-assistance-now-available-in-proquest-central/
-
-### Academic Research on Library RAG
-
-- **🎓 "Prospects of RAG for Academic Library Search and Retrieval"**
-  Bevara, R.V.K., et al. (2025). *Information Technology and Libraries*, 44(2).
-  https://doi.org/10.5860/ital.v44i2.17361
+**Your advantage as a librarian:** You evaluate sources for a living. When you try these tools, you'll immediately spot when citations are weak, when retrieval is poor, when answers aren't grounded. That's your professional expertise at work.
 
 ---
 
-## 3. RAG Frameworks & Orchestration (Low-Code to Full-Code)
+## 📚 Learn from Peer Libraries
 
-Tools for building custom RAG systems with varying levels of complexity.
+Real examples from libraries like yours. Use these as templates and inspiration.
 
-### Python Frameworks (Most Popular)
+### ⭐ KingbotGPT (San José State University)
 
-- **🆓 LlamaIndex**
-  https://www.llamaindex.ai/
-  **Docs:** https://docs.llamaindex.ai/
-  Purpose-built for RAG. Excellent documentation, active community. Used by SJSU KingbotGPT.
+**Live demo:** https://library.sjsu.edu/kingbot/
+**Launch:** September 2024
+**Tech Stack:** LlamaIndex, OpenAI GPT-4o-mini, ChromaDB, Streamlit
+**Open Source:** Yes, code on GitHub
 
-- **🆓 LangChain**
-  https://www.langchain.com/
-  **Docs:** https://python.langchain.com/docs/
-  General LLM orchestration framework with strong RAG support. Large ecosystem.
+**Why it's important:** Complete technical case study from an academic library. Built by librarians to understand RAG deeply enough to evaluate vendor tools critically.
 
-- **🆓 Haystack** (deepset)
-  https://haystack.deepset.ai/
-  Production-ready RAG framework. Good for NLP pipelines.
+**Cost reality:** Minimal monthly API costs (likely $20-40/month for production use)
 
-### Advanced RAG Architectures (2024)
+**Key insight from their paper:** Development was designed for "capacity building"—they built it so librarians could evaluate vendor AI tools from an informed position, not just accept marketing claims.
 
-- **🆓 Microsoft GraphRAG** (July 2024, v1.0 October 2024)
-  **Main:** https://www.microsoft.com/en-us/research/project/graphrag/
-  **GitHub:** https://github.com/microsoft/graphrag
-  **Blog:** https://www.microsoft.com/en-us/research/blog/graphrag-new-tool-for-complex-data-discovery-now-on-github/
-  Game-changing approach using knowledge graphs. 70-80% improvement over naive RAG. Exceptional for special collections, archives, and complex document collections. Uses LLMs to create knowledge graphs from documents.
+**Paper:** "Library-Led AI: Building a Library Chatbot as Service and Strategy" (ACRL 2025)
+https://www.ala.org/sites/default/files/2025-03/Library-LedAI.pdf
 
-- **🆓 AutoRAG: Automated Pipeline Optimization** (October 2024)
-  **Paper:** https://arxiv.org/abs/2410.20878
-  **GitHub:** https://github.com/Marker-Inc-Korea/AutoRAG
-  AutoML-style automation simplifies RAG development for libraries without ML expertise. Systematically tests configurations to find optimal pipeline.
+**Lesson learned:** They switched from LangChain to LlamaIndex ("simpler code that is easier to maintain"). Hybrid retrieval: website crawl + custom Q&A knowledge base.
 
-### Low-Code Platforms
+### T-Rex Chatbot (University of Calgary)
 
-- **💰 Streamlit**
-  https://streamlit.io/
-  **Free tier:** Yes
-  Build interactive web apps for RAG demos. Fast prototyping. Used by KingbotGPT.
+**Launch:** August 2021 (mature implementation)
+**Tech:** Ivy.ai RAG + LLMs
+**Performance:** Answers ~50% of questions at 4/5 rating or higher, freed 1.5 FTE for higher-level work
+**Languages:** 100+ supported
+**Accessibility:** WCAG 2.1 AA compliant
 
-- **💰 Gradio**
-  https://www.gradio.app/
-  **Free tier:** Yes
-  Create ML/AI interfaces quickly. Good for demos and MVPs.
+**Why it matters:** Longest-running library RAG chatbot with published metrics. Shows what "production-ready" looks like after years of refinement.
 
-### Deployment Platforms
+**Article:** "Implementing an AI Reference Chatbot at University of Calgary Library" (OCLC Research, Nov 2024)
+https://hangingtogether.org/implementing-an-ai-reference-chatbot-at-the-university-of-calgary-library/
 
-- **🆓 Google Colab**
-  https://colab.research.google.com/
-  Free Jupyter notebooks in browser. Great for learning and sharing demos.
+### Vendor Discovery Systems with RAG
 
-- **🆓 Jupyter**
-  https://jupyter.org/
-  Open-source notebooks for interactive code. Industry standard for data science.
+**All launched 2024-2025, all opt-in:**
 
-- **💰 Hugging Face Spaces**
-  https://huggingface.co/spaces
-  **Free tier:** Yes
-  Deploy Gradio/Streamlit apps. Community platform for ML models.
+- **📚💰 Ex Libris Primo Research Assistant** (Sept 2024)
+  RAG grounded in 5+ billion CDI records
+  https://clarivate.com/news/clarivate-launches-generative-ai-powered-primo-research-assistant/
 
----
+- **📚💰 ProQuest Summon Research Assistant** (March 2025)
+  Based on Ex Libris RAG architecture
+  https://librarytechnology.org/pr/31135
 
-## 4. Vector Databases
+- **📚💰 EBSCO AI Insights** (March 2025)
+  RAG grounded on full-text articles
+  https://www.ebsco.com/news-center/press-releases/ebsco-information-services-launches-newest-artificial-intelligence-features/
 
-Semantic search engines for RAG retrieval.
+**Critical note from Aaron Tay (systems librarian, widely followed):** Several vendor systems have guardrail problems, blocking legitimate searches like "Gaza war" or "Tulsa race riot." Ask vendors how they handle sensitive topics. This is where your professional judgment matters.
 
-### Free/Open Source
+### LibGuides from Peer Libraries
 
-- **🆓 ChromaDB**
-  https://www.trychroma.com/
-  Embedded vector database. Great for prototypes and small-scale. Used in presentation demo.
+Real examples you can adapt:
 
-- **🆓 Weaviate**
-  https://weaviate.io/
-  **Free cloud tier:** Yes
-  Open-source with cloud option. Production-ready.
+- **⭐ Ohio State Lima - Artificial Intelligence LibGuide**
+  https://osu.libguides.com/lima_ai
+  Explains RAG in plain language, covers practical tools, includes citation guidance
 
-- **🆓 Qdrant**
-  https://qdrant.tech/
-  **Free cloud tier:** Yes
-  High-performance, Rust-based. Good for production.
+- **Florida International University - AI + ACRL Frameworks**
+  https://library.fiu.edu/AI-ACRL/intro
+  Maps AI tools to ACRL Framework for Information Literacy—perfect for instruction librarians
 
-- **🆓 FAISS** (Meta AI)
-  https://github.com/facebookresearch/faiss
-  Library for efficient similarity search. Lower-level, more control.
-
-- **🆓 PostgreSQL pgvector** (Major 2024 development)
-  **Tutorial:** https://www.tigerdata.com/blog/postgresql-as-a-vector-database-using-pgvector
-  **Implementation:** https://www.enterprisedb.com/blog/rag-app-postgres-and-pgvector
-  **Major advantage for libraries already using PostgreSQL** for ILS/discovery systems. Reduces infrastructure complexity by consolidating relational data and vector embeddings in one system.
-
-### Commercial/Managed
-
-- **💰 Pinecone**
-  https://www.pinecone.io/
-  **Free tier:** Yes (100k vectors)
-  Fully managed, highly scalable. Popular for production.
-
-- **💰 Elasticsearch (Vector Search)**
-  https://www.elastic.co/elasticsearch/vector-database
-  Enterprise search with vector capabilities.
-
-### Learning Resources
-
-- **Understanding Vector Databases** (Pinecone)
-  https://www.pinecone.io/learn/vector-database/
-  Clear explanations with diagrams.
+- **University of Alaska Southeast - Artificial Intelligence**
+  https://uas.alaska.libguides.com/ai
+  Clear definitions using industry standards (NIST, IBM, NVIDIA), good glossary
 
 ---
 
-## 5. Large Language Models & APIs
+## 🧭 Essential Framework: Start Here
 
-The generation component of RAG.
+Before diving into tools or vendors, read this. It's your north star.
 
-### Commercial APIs (Pay-as-you-go)
+### ⭐ ACRL AI Competencies for Academic Library Workers
 
-- **💰 OpenAI API** (GPT-4, GPT-4o-mini)
-  https://platform.openai.com/
-  **Pricing:** https://openai.com/api/pricing/
-  Industry standard. GPT-4o-mini recommended for cost-effective RAG.
+**URL:** https://www.ala.org/acrl/standards/ai
+**Approved:** October 2025 (just released!)
 
-- **💰 Anthropic API** (Claude)
-  https://www.anthropic.com/api
-  **Docs:** https://docs.anthropic.com/
-  Strong context windows (200k+ tokens), good for long documents.
+**Why it matters:** **This is THE framework.** Four competency areas: 
+1. Ethical Considerations
+2. Knowledge & Understanding
+3. Analysis & Evaluation
+4. Use & Application
 
-- **💰 Google Gemini API**
-  https://ai.google.dev/
-  Competitive pricing, multimodal capabilities.
+**Key insight:** ACRL positions librarians as *critical evaluators* of AI tools, not passive users. Uses language like "grounded and verifiable" for good RAG outputs.
 
-- **💰 Cohere**
-  https://cohere.com/
-  Built for enterprise, strong embeddings. Used by Statista.
+**Your existing skills map directly:**
+- Source evaluation → Which docs go in RAG system?
+- Cataloging/metadata → How to structure knowledge?
+- Reference interviews → Understanding user needs
+- Information literacy instruction → Teaching critical AI use
 
-### Open-Source/Local Models
-
-- **🆓 Ollama**
-  https://ollama.ai/
-  Run Llama, Mistral, and other models locally. Privacy-focused.
-
-- **🆓 Llama 3.2 & 3.3** (Meta AI, Sept-Dec 2024)
-  **Release:** https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/
-  **RAG Tutorial:** https://zilliz.com/blog/learn-llama-3-2-and-how-to-build-rag-with-llama-with-milvus
-  Enables on-premise/privacy-preserving RAG for libraries. **Vision models (11B, 90B)** for multimodal RAG, **lightweight text models (1B, 3B)** can run on standard library hardware.
-
-- **🆓 Mistral / Mixtral** (Mistral AI, 2024)
-  **Mixtral 8X22B:** https://www.datacamp.com/tutorial/mixtral-8x22b
-  **RAG Tutorial:** https://towardsdatascience.com/building-evaluating-and-tracking-a-local-advanced-rag-system-mistral-7b-llamaindex-w-b-5c9c69059f92
-  Cost-efficient open-source with excellent multilingual support (English, French, Italian, German, Spanish). Sparse Mixture of Experts: 141B parameters, uses only 39B actively.
-
-- **🆓 Phi-2/Phi-3** (Microsoft)
-  https://huggingface.co/microsoft/phi-2
-  Small language models (2.7B-14B params) that run on modest hardware.
-
-### Model Hosting Platforms
-
-- **🆓 Hugging Face**
-  https://huggingface.co/
-  Repository of open models. Inference API available.
-
-- **💰 Replicate**
-  https://replicate.com/
-  Run open models via API. Pay per use.
+**How to use it:** Reference Section 3.2 when evaluating vendor tools. Use it to justify pilot projects to administration. Cite it when explaining why librarians should lead AI evaluation on campus.
 
 ---
 
-## 6. Embeddings Models
+## ✅ Ethics & Privacy: Before You Deploy
 
-Convert text to vectors for semantic search.
+Ask these questions BEFORE buying or building anything. Have conversations with your team, not just technical checklists.
 
-### Pre-trained Models (Free)
+### Privacy: What Are We Collecting?
 
-- **🆓 Sentence Transformers**
-  https://www.sbert.net/
-  Open-source library. Many pre-trained models for different domains. Used in presentation demo.
+**Remember:** Student queries to chatbots reveal research struggles, health questions, personal challenges. Treat chat logs like reference desk conversations—confidential and requiring protection.
 
-- **🆓 OpenAI Embeddings**
-  https://platform.openai.com/docs/guides/embeddings
-  **text-embedding-3-small:** $0.02 per 1M tokens (very affordable)
+**Questions to discuss:**
+- What's our data retention policy for queries?
+- Who has access to query logs?
+- How do we handle queries that reveal sensitive research topics?
+- What happens if we get a subpoena for chat logs?
 
-- **🆓 Cohere Embeddings**
-  https://cohere.com/embeddings
-  Free tier available. Multilingual support.
+**⭐ ALA Library Privacy Checklist**
+https://www.ala.org/advocacy/privacy/checklists/overview
+Three-tier priority system. Priority 1 = all libraries can do right now.
 
-### Model Selection Guide
+**AI-Specific Privacy Checklist (Just Solutions)**
+https://www.justinc.com/blog/ai-privacy-and-security-checklist/
+Key principle: "Think of it like a public forum. If you wouldn't post it on your website, don't type it into a chatbot."
 
-- **"Massive Text Embedding Benchmark" (MTEB)**
-  https://huggingface.co/spaces/mteb/leaderboard
-  Leaderboard comparing embedding models across tasks.
+### Equity: Who Benefits?
+
+Premium tiers = better answers. Are you creating information haves and have-nots?
+
+**Article:** "Knowledge Trade with Haves and Have-Nots" - Cox & Tzoc (2023)
+https://crln.acrl.org/index.php/crlnews/article/view/25868
+Real talk about tiered AI access in libraries.
+
+### Questions to Discuss (No Easy Answers)
+
+Before you launch a RAG system, have these conversations with your team:
+
+- **Censorship:** Who decides what goes in the knowledge base? What gets excluded? How do we handle controversial topics?
+- **Transparency:** Will you disclose when students are talking to AI vs. humans? Does it matter?
+- **Accessibility:** Is your RAG system WCAG compliant? Screen reader compatible?
+- **Hallucinations:** RAG reduces errors significantly but can't eliminate them (mathematically proven—see research section). How do you communicate this limitation honestly?
+- **Environmental cost:** Training frontier models costs $1.5-3 billion per model (The Information, 2025). What's our responsibility here?
+
+**Hard truth from research:** RAG can reduce hallucinations dramatically (studies show 15-80% improvement depending on implementation), but Xu et al. (2024) mathematically proved eliminating hallucinations entirely is impossible. Plan for errors, not perfection.
 
 ---
 
-## 7. Reranking Models (Critical for Production RAG)
+## 🤔 Questions to Ask RAG Vendors
 
-**Why reranking matters:** Adding a reranker after initial retrieval improves accuracy by 13-25%. Rerankers process query + document together for more accurate relevance scoring than embeddings alone.
+Apply your source evaluation skills to sales pitches. Demand proof, not marketing.
 
-### Commercial Rerankers
+### Is It Actually RAG?
 
-- **💰 Cohere Rerank v3.5**
+Not every "AI-powered" tool uses RAG. Many are just search-only or summarization-only.
+
+- [ ] Does it retrieve documents AND cite sources?
+- [ ] Can you see which chunks were retrieved?
+- [ ] Does it cite sources before generating answers?
+- [ ] Can you test it with your own documents?
+
+**Red flag:** If they say "AI-powered" but can't show you citations, it's probably not RAG.
+
+### Privacy & Data
+
+- [ ] Where is our library data stored? (Which country? Cloud region?)
+- [ ] Who has access to patron queries?
+- [ ] Is our data used to train your models?
+- [ ] FERPA/GDPR/accessibility compliance documentation?
+- [ ] What happens to chat logs? How long retained?
+- [ ] Can we audit what data you have about our users?
+- [ ] What's your security model? (See OWASP LLM Top 10)
+
+### Accuracy & Bias
+
+- [ ] What are your measured hallucination rates? (Demand actual numbers, not "very low")
+- [ ] How do you evaluate quality? (Ask for their testing methodology)
+- [ ] Can we audit wrong answers? (Access to logs, feedback mechanisms)
+- [ ] What happens when it's wrong? (Error handling, user notifications)
+- [ ] How do you handle bias in retrieval/generation?
+- [ ] How do you handle controversial or sensitive topics?
+
+### Cost & Lock-In
+
+- [ ] Pricing model? (Per query? Per user? Per document? Per token?)
+- [ ] What if our usage increases 10x? (Scalability costs)
+- [ ] Can we export our data + embeddings? (Or are we locked in forever?)
+- [ ] Contract terms? (Auto-renewal? Cancellation policy?)
+- [ ] Hidden costs? (Training, customization, API overages, maintenance)
+
+### Performance & Reliability
+
+- [ ] What's your uptime SLA?
+- [ ] Average response time? (2 seconds? 10 seconds? Users abandon slow tools)
+- [ ] How often do models update? (Can we control this or does it just happen?)
+- [ ] What happens during outages?
+
+### Support & Training
+
+- [ ] What training do you provide our staff?
+- [ ] Ongoing support structure? (Email? Phone? Ticket system?)
+- [ ] Documentation quality? (Can we see it before purchase?)
+- [ ] Community/user group?
+
+**Remember:** You evaluate sources professionally. Apply that same rigor here. If their answers are vague or defensive, that's a data point.
+
+---
+
+## 🛠️ Build Your Own? Tools by Experience Level
+
+### 🟢 No Code (This Afternoon)
+
+Already covered above—start with NotebookLM. You can have a working RAG system in 30 minutes with zero coding.
+
+### 🟡 Low Code (Weekend Project)
+
+**Google Colab + Pre-built Notebooks**
+- No local setup needed (runs in browser)
+- Free tier available
+- Modify existing RAG notebooks slightly
+- Good for learning and demos
+
+**Streamlit Chatbot Builder**
+- Python-based UI framework
+- KingbotGPT uses this
+- Free Community Cloud hosting
+- Tutorial: https://streamlit.io/
+
+**Presentation demo materials:**
+- GitHub: https://github.com/radio-shaq/Lyrasis-slides-11-2025
+- Includes working Colab notebook you can customize
+- Sample FAQ template provided
+
+### 🔴 Full Implementation (Systems Librarians)
+
+**Python RAG Frameworks:**
+
+**🆓 LlamaIndex** (Recommended for beginners)
+- https://www.llamaindex.ai/
+- Purpose-built for RAG
+- Excellent documentation
+- Used by SJSU KingbotGPT
+- Tutorial: https://docs.llamaindex.ai/en/stable/getting_started/starter_example.html
+
+**🆓 LangChain** (More general-purpose)
+- https://www.langchain.com/
+- Broader LLM orchestration
+- Larger ecosystem
+- Tutorial: https://python.langchain.com/docs/tutorials/rag/
+
+**Vector Databases (Your Semantic Card Catalog):**
+
+**🆓 ChromaDB** (Start here for prototypes)
+- https://www.trychroma.com/
+- Embedded, no separate server needed
+- Free forever
+- Used in presentation demo + KingbotGPT
+
+**🆓 PostgreSQL pgvector** ⭐ Major 2024 development
+- Tutorial: https://www.enterprisedb.com/blog/rag-app-postgres-and-pgvector
+- **Huge for libraries already using PostgreSQL** for ILS/discovery systems
+- Reduces infrastructure complexity—one database for everything
+- Free if you're already running Postgres
+
+**🆓 Weaviate / Qdrant / FAISS**
+- All solid open-source options
+- Free tiers available for cloud versions
+- Production-ready
+
+**💰 Pinecone** (If you need managed/scaled)
+- https://www.pinecone.io/
+- Free tier: 100k vectors (plenty for pilots!)
+- Starter: $70/month for 5M vectors
+- Only upgrade if you outgrow free tier
+
+**Large Language Models:**
+
+**💰 OpenAI API** (GPT-4o-mini recommended)
+- https://platform.openai.com/
+- **Cost:** $0.15 per 1M input tokens, $0.60 per 1M output tokens
+- **Reality check:** 1000 RAG queries/month = ~$0.60. Yes, really.
+
+**💰 Anthropic API** (Claude 3.5 Haiku)
+- https://www.anthropic.com/api
+- Strong context windows (200k+ tokens), good for long documents
+- Similar pricing to OpenAI
+
+**🆓 Ollama** (Run models locally)
+- https://ollama.ai/
+- Run Llama, Mistral, Phi locally
+- **Privacy-focused:** Everything stays on your server
+- Free, but needs decent hardware (GPU helpful)
+
+**🆓 Llama 3.2 & 3.3** (Meta AI, Sept-Dec 2024)
+- https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/
+- Enables on-premise/privacy-preserving RAG
+- Lightweight models (1B, 3B) can run on standard library hardware
+- Vision models (11B, 90B) for multimodal RAG
+
+---
+
+## 🆕 What's New in 2024-2025?
+
+Developments worth knowing about.
+
+### GraphRAG (Microsoft, October 2024) ⭐ Game-Changer
+
+**What it is:** Uses LLMs to build knowledge graphs from your documents, then does RAG on the graph instead of just text chunks.
+
+**Why it matters:** 70-80% improvement over standard RAG for complex questions. **Exceptional for special collections, archives, and complex document relationships.**
+
+**Resources:**
+- Main: https://www.microsoft.com/en-us/research/project/graphrag/
+- GitHub: https://github.com/microsoft/graphrag
+- Blog: https://www.microsoft.com/en-us/research/blog/graphrag-new-tool-for-complex-data-discovery-now-on-github/
+
+**Use case:** Your archives have hundreds of interrelated documents. GraphRAG understands the relationships between them, not just keyword matches.
+
+### Reranking (Essential for Production)
+
+**What it is:** After initial retrieval, a reranker re-scores results by processing query + document together.
+
+**Why it matters:** 13-25% accuracy improvement over embeddings alone. Makes the difference between "good enough for demo" and "good enough for production."
+
+**Tools:**
+- **💰 Cohere Rerank v3.5** (Dec 2024, state-of-the-art)
   https://cohere.com/rerank
-  **Docs:** https://docs.cohere.com/changelog/rerank-v3.5
-  State-of-the-art reranker (Dec 2024). 13.89% accuracy improvement over OpenAI embeddings alone. 100+ languages, 4096 token context.
-
-### Open-Source Rerankers
-
+  100+ languages, 4096 token context
+  
 - **🆓 Cross-Encoders** (Sentence Transformers)
   https://www.sbert.net/examples/applications/cross-encoder/README.html
-  Open-source alternative. Process query + document jointly for accurate ranking.
+  Open-source alternative
 
-- **🆓 BGE Reranker** (BAAI)
-  https://huggingface.co/BAAI/bge-reranker-v2-m3
-  Multilingual reranker from Beijing Academy of AI. Free, performant.
+**Article:** "The Missing Component in Your RAG Chatbot" (Coalfire)
+https://coalfire.com/the-coalfire-blog/one-component-you-desperately-need-in-your-rag-chatbot-toolchain
 
-### Learning Resources
+### AutoRAG (October 2024)
 
-- **"The Missing Component in Your RAG Chatbot"** (Coalfire)
-  https://coalfire.com/the-coalfire-blog/one-component-you-desperately-need-in-your-rag-chatbot-toolchain
-  Explains why reranking is essential for production systems.
+**What it is:** AutoML-style automation for RAG pipelines. Tests different configurations automatically to find what works best.
 
-- **NVIDIA RAG Control Points**
-  Identifies reranking as one of 15 critical RAG control points for optimization.
+**Why it matters:** Simplifies RAG development for libraries without ML expertise.
 
----
+**Resources:**
+- Paper: https://arxiv.org/abs/2410.20878
+- GitHub: https://github.com/Marker-Inc-Korea/AutoRAG
 
-## 8. Learning Resources
+### NotebookLM Audio Overviews (October 2024)
 
-Tutorials, courses, and blogs for RAG implementation.
+Generate podcast-style discussions from your documents. Two AI hosts talk through your content. Wild feature for consuming content while multitasking.
 
-### Blogs & News (Highly Recommended)
-
-- **⚡ Simon Willison's Weblog**
-  https://simonwillison.net/
-  Daily RAG experiments, practical tools, critical analysis. Mentioned in presentation.
-
-- **LlamaIndex Blog**
-  https://www.llamaindex.ai/blog
-  RAG techniques, case studies, tutorials.
-
-- **Pinecone Learning Center**
-  https://www.pinecone.io/learn/
-  Vector database concepts, RAG patterns.
-
-- **Hugging Face Blog**
-  https://huggingface.co/blog
-  Open-source models, RAG implementations.
-
-### Tutorials & Courses
-
-- **🆓 "Building RAG Applications" (LangChain)**
-  https://python.langchain.com/docs/tutorials/rag/
-  Step-by-step tutorial with code.
-
-- **🆓 "RAG Tutorial" (LlamaIndex)**
-  https://docs.llamaindex.ai/en/stable/getting_started/starter_example.html
-  Quickstart with clear examples.
-
-- **🆓 "Vector Databases for Beginners"** (Weaviate)
-  https://weaviate.io/developers/weaviate
-  Concepts + hands-on exercises.
-
-- **💰 "LangChain for LLM Application Development"** (DeepLearning.AI)
-  https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/
-  Free short course by Andrew Ng.
-
-### YouTube Channels
-
-- **Sam Witteveen** (RAG tutorials)
-  https://www.youtube.com/@samwitteveenai
-  Practical RAG implementations with code walkthroughs.
-
-- **All About AI**
-  https://www.youtube.com/@AllAboutAI
-  LLM news, RAG techniques, tool reviews.
+**Use case:** Turn your library's annual report into a 10-minute podcast for busy staff.
 
 ---
 
-## 8. Research & Academic Papers
+## 📊 Evaluation & Testing
 
-Peer-reviewed research on RAG, hallucinations, and AI in libraries.
-
-### Foundational RAG Papers
-
-- **🎓 "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"**
-  Lewis, P., et al. (2020). *NeurIPS 2020*.
-  https://arxiv.org/abs/2005.11401
-  Original RAG paper from Meta AI.
-
-- **🎓 "A Survey on Hallucination in Large Language Models"**
-  Huang, L., et al. (2025). *ACM Transactions on Information Systems*, 43(2).
-  https://doi.org/10.1145/3703155
-  Comprehensive review of hallucination research.
-
-### Hallucinations & Limitations
-
-- **🎓 "Hallucination is Inevitable: An Innate Limitation of Large Language Models"**
-  Xu, Z., Jain, S., & Kankanhalli, M. (2024). *arXiv:2401.11817*.
-  https://arxiv.org/abs/2401.11817
-  Mathematical proof using learning theory. Cited in presentation.
-
-- **🎓 "LLMs Will Always Hallucinate, and We Need to Live With This"**
-  Banerjee, S., Agarwal, A., & Singla, S. (2024). *Springer LNNS*, vol 1554.
-  https://doi.org/10.1007/978-3-031-99965-9_39
-  Structural hallucination as intrinsic characteristic.
-
-- **🎓 "Detecting Hallucinations Using Semantic Entropy"**
-  Farquhar, S., et al. (2024). *Nature*, 630, 625-630.
-  https://doi.org/10.1038/s41586-024-07421-0
-  Detection methods published in Nature.
-
-### Medical/Clinical Studies (High Hallucination Rates)
-
-- **🎓 "Hallucination Rates and Reference Accuracy of ChatGPT and Bard"**
-  Chelli, M., et al. (2024). *Journal of Medical Internet Research*, 26, e53164.
-  https://doi.org/10.2196/53164
-  28.6% (GPT-4), 39.6% (GPT-3.5), 91.4% (Bard) hallucination rates.
-
-- **🎓 "Multi-model Assurance Analysis of LLM Vulnerabilities"**
-  Omar, M., et al. (2025). *Communications Medicine*, 5, 330.
-  https://doi.org/10.1038/s43856-025-01021-3
-  Adversarial hallucination attacks in clinical decision support; reports 50-82% hallucination rates across models with mitigation strategies.
-
-### Legal Domain Studies
-
-- **🎓 "Legal RAG Hallucinations"** (Stanford RegLab)
-  https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf
-  Hallucination patterns in legal information retrieval.
-
-### Technical Analysis & Industry Reports
-
-- **"Why RAG Won't Solve Generative AI's Hallucination Problem"**
-  Wiggers, K. (2024). *TechCrunch*.
-  https://techcrunch.com/2024/05/04/why-rag-wont-solve-generative-ais-hallucination-problem/
-
-- **"LLM Hallucinations in 2025"** (Lakera AI)
-  https://www.lakera.ai/blog/guide-to-hallucinations-in-large-language-models
-  Current state of hallucination research and mitigation.
-
-- **"AI Hallucinations Statistics"** (AllAboutAI)
-  https://www.allaboutai.com/resources/ai-statistics/ai-hallucinations/
-  Comprehensive hallucination rate data across models.
-
----
-
-## 9. Evaluation Frameworks & Best Practices
-
-Standards and checklists for assessing RAG systems.
+How to know if your RAG system actually works.
 
 ### Professional Standards
 
-- **📚⚡ ACRL AI Competencies for Academic Library Workers** (October 2025)
-  https://www.ala.org/acrl/standards/ai
-  Framework for evaluating AI tools, including RAG. Section 3.2 essential.
+**📚⚡ ACRL AI Competencies** (October 2025)
+https://www.ala.org/acrl/standards/ai
+Use Section 3.2 as evaluation rubric
 
-- **ACRL Framework for Information Literacy for Higher Education**
-  https://www.ala.org/acrl/standards/ilframework
-  Foundation for critical AI evaluation.
+**ACRL Framework for Information Literacy**
+https://www.ala.org/acrl/standards/ilframework
+Foundation for critical AI evaluation
 
-### Technical Evaluation
+### Technical Evaluation Frameworks
 
-- **RAG Evaluation Metrics** (LlamaIndex)
-  https://docs.llamaindex.ai/en/stable/examples/evaluation/
-  Context relevance, answer relevance, faithfulness metrics.
+**🆓 RAGAS: Automated RAG Evaluation** (EACL 2024)
+- Paper: https://aclanthology.org/2024.eacl-demo.16/
+- GitHub: https://github.com/explodinggradients/ragas
+- **Why it matters:** Systematic quality evaluation without expensive human annotation
+- Metrics: context precision, context recall, faithfulness, answer relevancy
 
-- **🎓 RAGAS: Automated RAG Evaluation** (EACL 2024)
-  **Paper:** https://aclanthology.org/2024.eacl-demo.16/
-  **GitHub:** https://github.com/explodinggradients/ragas
-  Essential for systematic RAG quality evaluation without expensive human annotation. Metrics: context precision, context recall, faithfulness, answer relevancy.
+**🆓 TruLens RAG Triad Evaluation** (TruEra)
+- Docs: https://www.trulens.org/getting_started/core_concepts/rag_triad/
+- GitHub: https://github.com/truera/trulens
+- Helps identify hallucinations, ensure factual accuracy
+- Three metrics: context relevance, groundedness, answer relevance
+- Free course available from DeepLearning.AI
 
-- **🆓 TruLens RAG Triad Evaluation** (TruEra)
-  **Docs:** https://www.trulens.org/getting_started/core_concepts/rag_triad/
-  **GitHub:** https://github.com/truera/trulens
-  Helps identify hallucinations and ensure factual accuracy. Three metrics: context relevance, groundedness, answer relevance. Free course available from DeepLearning.AI.
+**🎓 RAGBench** (July 2024)
+- Paper: https://arxiv.org/abs/2407.11005
+- First comprehensive large-scale RAG benchmark
+- 100K examples across 5 domains
 
-- **🎓 RAGBench: Explainable RAG Benchmark** (July 2024)
-  **Paper:** https://arxiv.org/abs/2407.11005
-  First comprehensive large-scale RAG benchmark with 100K examples across 5 domains. TRACe evaluation framework with explainable metrics.
+**🎓 MIRAGE: Medical Information RAG Evaluation** (ACL 2024)
+- https://teddy-xionggz.github.io/benchmark-medical-rag/
+- **Critical for health sciences libraries implementing RAG**
+- 7,663 medical questions from 5 datasets
 
-- **🎓 MIRAGE: Medical Information RAG Evaluation** (ACL 2024)
-  **Website:** https://teddy-xionggz.github.io/benchmark-medical-rag/
-  **GitHub:** https://github.com/Teddy-XiongGZ/MIRAGE
-  Critical for health sciences libraries implementing RAG. Contains 7,663 medical questions from 5 datasets with MedRag toolkit.
+### What to Test
 
-### Ethical Considerations
+From LlamaIndex/TruLens frameworks:
 
-- **"Knowledge Trade with Haves and Have-Nots"**
-  Cox, C., & Tzoc, E. (2023). *College & Research Libraries News*.
-  https://crln.acrl.org/index.php/crlnews/article/view/25868
-  Equity concerns with tiered AI access. Cited in presentation.
+**Context Relevance:** Are the retrieved documents actually relevant to the query?
+**Answer Relevance:** Does the answer actually address what was asked?
+**Faithfulness/Groundedness:** Is the answer supported by the retrieved documents?
+
+**Your library test set:**
+- Create 50-100 Q&A pairs from your FAQ
+- Run them through your RAG system
+- Manually review answers for accuracy
+- Track hallucination rate
+- Compare to vendor claims
 
 ---
 
-## 10. RAG Security & Privacy
+## 🔒 Security & Privacy Concerns
 
-Critical considerations for patron-facing systems.
+Critical for patron-facing systems.
 
-### Prompt Injection & Attacks
+### Prompt Injection Attacks
 
+**The problem:** Malicious documents in your knowledge base can manipulate RAG outputs. User queries can contain adversarial prompts.
+
+**Resources:**
 - **OWASP LLM Top 10: Prompt Injection**
   https://genai.owasp.org/llmrisk/llm01-prompt-injection/
-  Industry-standard security guidelines for LLM applications.
+  Industry-standard security guidelines
 
-- **"Indirect Prompt Injection: Generative AI's Greatest Security Flaw"** (Turing Institute)
+- **"Indirect Prompt Injection"** (Turing Institute)
   https://cetas.turing.ac.uk/publications/indirect-prompt-injection-generative-ais-greatest-security-flaw
-  Explains how malicious documents can manipulate RAG outputs.
+  How malicious documents manipulate RAG outputs
 
 - **Microsoft Adaptive Prompt Injection Challenge**
   https://msrc.microsoft.com/blog/2024/12/announcing-the-adaptive-prompt-injection-challenge-llmail-inject/
-  Demonstrates prompt injection worms in RAG systems (LLMail-Inject).
+  Demonstrates prompt injection worms in RAG systems
 
 - **🎓 "RAG and Roll: Attacks on Retrieval-Augmented Generation"**
   https://arxiv.org/abs/2408.05025
-  Research on RAG-specific attack vectors.
+  Research on RAG-specific attack vectors
 
-- **🎓 "Backdoor Attacks on RAG Systems"**
-  https://arxiv.org/abs/2410.14479
-  Document poisoning and adversarial attacks on RAG.
+### Key Library Concerns
 
-### Privacy Considerations
+**Data hygiene:** Malicious documents in knowledge base can poison outputs
+**Input validation:** User queries need sanitization
+**Content filtering:** Protect against adversarial prompts
+**Patron privacy:** Query logs reveal research interests
+**Access control:** Permission-aware retrieval essential
 
+**Privacy research:**
 - **🎓 "Privacy in RAG Systems"** (ACL 2024 Findings)
   https://aclanthology.org/2024.findings-acl.267/
-  RAG can leak private retrieval data but also mitigate LLM training data leakage.
-
-### Key Concerns for Libraries
-
-- **Data hygiene:** Malicious documents in knowledge base can poison outputs
-- **Input validation:** User queries need sanitization
-- **Content filtering:** Protect against adversarial prompts
-- **Patron privacy:** Query logs reveal research interests
-- **Access control:** Permission-aware retrieval essential
+  RAG can leak private retrieval data but also mitigate LLM training data leakage
 
 ---
 
-## 11. Community & Discussion
+## 📖 Research Papers: The Science Behind RAG
 
-Where to ask questions and follow developments.
+### Foundational RAG
 
-### Forums & Communities
+**🎓 "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"**
+Lewis, P., et al. (2020). *NeurIPS 2020*.
+https://arxiv.org/abs/2005.11401
+Original RAG paper from Meta AI. Where it all started.
 
-- **r/LocalLLaMA** (Reddit)
-  https://www.reddit.com/r/LocalLLaMA/
-  Running models locally, privacy-focused RAG.
+### Hallucinations & Limitations (Why RAG Can't Be Perfect)
 
-- **LangChain Discord**
-  https://discord.com/invite/langchain
-  Active community for RAG questions.
+**🎓 "Hallucination is Inevitable: An Innate Limitation of Large Language Models"**
+Xu, Z., Jain, S., & Kankanhalli, M. (2024). *arXiv:2401.11817*.
+https://arxiv.org/abs/2401.11817
+**Mathematical proof** using learning theory. Hallucinations cannot be eliminated for any computable LLM, regardless of architecture or training. Cited in presentation.
 
-- **Hugging Face Forums**
-  https://discuss.huggingface.co/
-  Model discussions, embeddings, technical Q&A.
+**🎓 "LLMs Will Always Hallucinate, and We Need to Live With This"**
+Banerjee, S., Agarwal, A., & Singla, S. (2024). *Springer LNNS*, vol 1554.
+https://doi.org/10.1007/978-3-031-99965-9_39
+Structural hallucination as intrinsic characteristic using Gödel's Incompleteness Theorem.
 
-### Library-Specific
+**🎓 "Detecting Hallucinations Using Semantic Entropy"**
+Farquhar, S., et al. (2024). *Nature*, 630, 625-630.
+https://doi.org/10.1038/s41586-024-07421-0
+Detection methods published in *Nature*. Shows how to identify when LLMs are uncertain.
 
-- **Code4Lib**
-  https://code4lib.org/
-  Library technology community. Mailing list and annual conference.
+### Measured Hallucination Rates
 
-- **LITA (Library & Information Technology Association)**
-  https://www.ala.org/lita/
-  ALA division focused on library technology.
+**🎓 "Hallucination Rates and Reference Accuracy of ChatGPT and Bard"**
+Chelli, M., et al. (2024). *Journal of Medical Internet Research*, 26, e53164.
+https://doi.org/10.2196/53164
+**Without RAG:** 28.6% (GPT-4), 39.6% (GPT-3.5), 91.4% (Bard) hallucination rates
+Shows the importance of RAG for reducing errors.
 
----
+**🎓 "Multi-model Assurance Analysis of LLM Vulnerabilities"**
+Omar, M., et al. (2025). *Communications Medicine*, 5, 330.
+https://doi.org/10.1038/s43856-025-01021-3
+50-82% hallucination rates across models in clinical settings; mitigation strategies.
 
-## 11. Cost Estimation & Budgeting
+### Library-Specific Research
 
-Realistic pricing for planning.
+**🎓 "Prospects of RAG for Academic Library Search and Retrieval"**
+Bevara, R.V.K., et al. (2025). *Information Technology and Libraries*, 44(2).
+https://doi.org/10.5860/ital.v44i2.17361
+Academic analysis of RAG applications in library contexts.
 
-### API Costs (as of November 2025)
+### Survey Papers (Great Overviews)
 
-**OpenAI:**
-- GPT-4o-mini: $0.15 per 1M input tokens, $0.60 per 1M output tokens
-- text-embedding-3-small: $0.02 per 1M tokens
-- Typical RAG query: $0.001-0.005 depending on document size
-
-**Anthropic:**
-- Claude 3.5 Haiku: $0.25 per 1M input tokens, $1.25 per 1M output tokens
-- Claude 3.5 Sonnet: $3 per 1M input tokens, $15 per 1M output tokens
-
-**Pinecone:**
-- Free tier: 100k vectors
-- Starter ($70/month): 5M vectors, serverless
-- Enterprise: Custom pricing
-
-### Budget Planning
-
-**Small pilot (100-1000 queries/month):**
-- Free tier tools: $0
-- Low-volume API: $5-20/month
-- Vector DB: Free tier sufficient
-
-**Medium deployment (10k queries/month):**
-- API costs: $50-200/month
-- Vector DB: $50-100/month
-- Total: $100-300/month
-
-**Production scale (100k+ queries/month):**
-- API costs: $500-2000/month
-- Vector DB: $200-1000/month
-- Infrastructure: $500+/month
-- Total: $1200-3500/month
-
-**Hidden costs to factor:**
-- Staff time (development, maintenance)
-- Ethics review
-- Training/documentation
-- Monitoring and quality assurance
+**🎓 "A Survey on Hallucination in Large Language Models"**
+Huang, L., et al. (2025). *ACM Transactions on Information Systems*, 43(2).
+https://doi.org/10.1145/3703155
+Comprehensive review of hallucination research, mitigation strategies.
 
 ---
 
-## 12. Take-Home Resources from Presentation
+## 💰 Real Talk About Costs
 
-Materials specific to this presentation.
+Let's be honest about what this actually costs, not vendor fantasy numbers.
 
-### Presentation Materials
+### The SJSU Reality Check
 
-- **GitHub Repository**
-  https://github.com/radio-shaq/Lyrasis-slides-11-2025
-  Slides, speaker notes, demo notebook, FAQ template
+KingbotGPT at San José State runs in production serving students 24/7. Their costs are **minimal**—likely $20-40/month total for APIs. They're not spending hundreds or thousands per month.
 
-- **Working Colab Demo**
-  `RAG_Demo_LYRASIS.ipynb` in repository
-  Upload to https://colab.research.google.com/
+### Realistic Budget Scenarios
 
-- **Sample FAQ CSV Template**
-  `sample_library_faq_data.csv` in repository
-  Customize with your library's FAQs
+**Proof-of-Concept / Small Pilot (500-1000 queries/month)**
+- OpenAI GPT-4o-mini: $0.50-3/month
+- ChromaDB: Free (embedded)
+- Sentence Transformers embeddings: Free (open-source)
+- Streamlit Community Cloud: Free tier
+- **Total: $0-5/month**
 
-### How to Use the Demo
+Seriously. You can run a working RAG system for the cost of a latte.
 
-1. Download `RAG_Demo_LYRASIS.ipynb` from GitHub repo
-2. Upload to Google Colab
-3. Run cells 1-5 (no API key needed for Part 1)
-4. Optional: Add your OpenAI API key to try Part 2 (Playground)
-5. Customize with your own FAQ CSV
+**Small Production (5000-10k queries/month)**
+- API costs: $5-30/month
+- Vector database: Free tier (ChromaDB/Weaviate)
+- Hosting: Free tier (Streamlit/Hugging Face Spaces)
+- **Total: $10-50/month**
 
-### Evaluation Questions Checklist
+**Medium Scale (50k queries/month)**
+- API costs: $50-150/month
+- Vector DB: $0-70/month (may still be free tier!)
+- **Total: $50-200/month**
 
-Key questions from presentation for evaluating RAG vendors:
+### Cost Breakdown Example
 
-**Is it actually RAG?**
-- Does it retrieve + cite documents?
-- Can you see which chunks were retrieved?
-- Does it cite sources before generating?
+**1000 student queries per month:**
+- Average query: ~500 input tokens (retrieved context)
+- Average response: ~150 output tokens
+- GPT-4o-mini pricing: $0.15 per 1M input, $0.60 per 1M output
 
-**Data & Privacy:**
-- Where is data stored? (Cloud region?)
-- Who has access?
-- Used for training other models?
-- GDPR/FERPA/accessibility compliance?
+**Math:**
+- Input: 500K tokens × $0.15/1M = $0.075
+- Output: 150K tokens × $0.60/1M = $0.090
+- **Total: $0.17/month**
 
-**Accuracy & Bias:**
-- What are hallucination rates? (Demand numbers)
-- How do they measure quality?
-- Can you audit wrong answers?
-- What happens when it's wrong?
+Add embeddings and you're still under $1/month for 1000 queries.
 
-**Cost & Lock-In:**
-- Pricing model? (Per query? Per user? Per document?)
-- What if usage 10x?
-- Can you export data + embeddings?
-- Contract terms?
+### Free Tier Reality
+
+**You can pilot RAG entirely free:**
+- NotebookLM: Free
+- ChromaDB: Free
+- Sentence Transformers: Free
+- OpenAI free tier: 3 requests/day (for testing)
+- Ollama + local models: Free (if you have hardware)
+- Streamlit Community Cloud: Free
+- Google Colab: Free
+
+**When you need to pay:**
+- Scaling beyond ~10k queries/month
+- Need faster response times
+- Want commercial support
+- Need enterprise features (SSO, audit logs, SLAs)
+
+### Hidden Costs to Actually Consider
+
+The expensive part isn't the tools, it's:
+- **Staff time** (development, maintenance, training)
+- **Ethics review** (getting institutional buy-in)
+- **Quality assurance** (ongoing testing, monitoring)
+- **Documentation** (training materials, user guides)
+
+Budget staff time, not API costs.
 
 ---
 
-## 13. What to Try This Week
+## 🌐 Who to Follow & Where to Learn
 
-Actionable next steps organized by time commitment.
+### Blogs (Highly Recommended)
+
+**⚡ Aaron Tay's Musings about Librarianship**
+- Substack: https://aarontay.substack.com/
+- Blog: http://musingsaboutlibrarianship.blogspot.com/
+- **Who:** Head of Data Services, Singapore Management University
+- **Why follow:** THE library voice on AI/RAG. Weekly vendor reviews, critical analysis, real implementations. On Clarivate AI governance board.
+
+**⚡ Simon Willison's Weblog**
+- https://simonwillison.net/
+- **Who:** Co-creator of Django, AI researcher
+- **Why follow:** Daily RAG experiments, practical tools, critical thinking. Not library-specific but essential for understanding what's actually possible.
+
+**LlamaIndex Blog**
+https://www.llamaindex.ai/blog
+RAG techniques, case studies, tutorials.
+
+**Pinecone Learning Center**
+https://www.pinecone.io/learn/
+Vector database concepts, RAG patterns, excellent explanations.
+
+### Tutorials & Courses (Free)
+
+**🆓 "Building RAG Applications" (LangChain)**
+https://python.langchain.com/docs/tutorials/rag/
+Step-by-step tutorial with code
+
+**🆓 "RAG Tutorial" (LlamaIndex)**
+https://docs.llamaindex.ai/en/stable/getting_started/starter_example.html
+Quickstart with clear examples
+
+**💰 "LangChain for LLM Application Development"** (DeepLearning.AI)
+https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/
+Free short course by Andrew Ng
+
+### Community Forums
+
+**r/LocalLLaMA** (Reddit)
+https://www.reddit.com/r/LocalLLaMA/
+Running models locally, privacy-focused RAG
+
+**LangChain Discord**
+https://discord.com/invite/langchain
+Active community for RAG questions
+
+**Code4Lib**
+https://code4lib.org/
+Library technology community, mailing list, annual conference
+
+**LITA (Library & Information Technology Association)**
+https://www.ala.org/lita/
+ALA division focused on library technology
+
+---
+
+## 📋 What to Try This Week
+
+Actionable next steps by time commitment.
 
 ### 30 Minutes
 
-1. **Upload your FAQ to NotebookLM or ChatGPT**
-   Watch how it retrieves and cites (or doesn't)
+**1. Upload your FAQ to NotebookLM**
+- Go to https://notebooklm.google.com/
+- Upload your library FAQ (PDF, Google Doc, or paste text)
+- Ask 5 questions you know the answers to
+- Watch how it retrieves and cites (or doesn't)
+- **You now understand RAG UX patterns**
 
-2. **Read ACRL AI Competencies Section 3.2**
-   https://www.ala.org/acrl/standards/ai
+**2. Read ACRL AI Competencies Section 3.2**
+https://www.ala.org/acrl/standards/ai
+The evaluation framework you need
 
-3. **Browse Simon Willison's blog**
-   https://simonwillison.net/
+**3. Try KingbotGPT**
+https://library.sjsu.edu/kingbot/
+Ask it questions about your own library (it won't know, but watch how it responds)
 
 ### 2-3 Hours
 
-1. **Run the presentation Colab demo**
-   Download from GitHub, customize with your FAQ CSV
+**1. Run the presentation Colab demo**
+- Download from GitHub: https://github.com/radio-shaq/Lyrasis-slides-11-2025
+- Upload `RAG_Demo_LYRASIS.ipynb` to Google Colab
+- Customize with your FAQ CSV
+- **You now understand RAG architecture**
 
-2. **Try KingbotGPT** (SJSU chatbot)
-   https://libapps.sjsu.edu/kingbot/
-   Test with questions about your own library
+**2. Compare three tools with the same document**
+- Upload your circulation policy to NotebookLM, ChatGPT, and Perplexity
+- Ask the same 10 questions to each
+- Compare citation quality
+- **You now understand RAG quality differences**
 
-3. **Read a hallucination research paper**
-   Start with Xu et al. (2024) - it's accessible: https://arxiv.org/abs/2401.11817
+**3. Read a hallucination research paper**
+Start with Xu et al. (2024) - it's surprisingly accessible:
+https://arxiv.org/abs/2401.11817
 
 ### One Week
 
-1. **Build a proof-of-concept**
-   Use LlamaIndex tutorial + your FAQ data + free LLM
+**1. Build a proof-of-concept**
+- Use LlamaIndex tutorial + your FAQ data + OpenAI free tier
+- Get something working end-to-end
+- **You now understand RAG implementation**
 
-2. **Compare three no-code tools**
-   NotebookLM vs ChatGPT vs Perplexity with same document set
+**2. Draft an evaluation framework**
+- Use ACRL competencies
+- Add vendor questions from this guide
+- Customize for your library's needs
+- **You now have a tool for vendor demos**
 
-3. **Draft an evaluation framework**
-   Use ACRL competencies + questions checklist from presentation
+**3. Have the ethics conversation**
+- Share the ethics section with your team
+- Discuss: What are our lines? What makes us uncomfortable?
+- Document your library's values
+- **You now have a foundation for AI policy**
 
 ---
 
-## 14. Key Takeaways from Presentation
+## 🎯 Key Takeaways
 
-Quick reference to core concepts.
+Quick reference to core concepts from the presentation.
 
 ### What RAG Does
 
-- **Without RAG:** LLM uses only training data (closed-book exam)
-- **With RAG:** LLM retrieves your documents first (open-book exam)
-- **Result:** Significantly reduces hallucinations (varies by model and task - see Chelli et al., Farquhar et al.)
-- **Limitation:** Cannot eliminate hallucinations entirely (mathematically proven - see Xu et al., Banerjee et al.)
+**Without RAG:** LLM uses only training data (closed-book exam)
+**With RAG:** LLM retrieves your documents first (open-book exam)
+**Result:** Dramatically reduces hallucinations (studies show 70-90%+ improvement)
+**Limitation:** Cannot eliminate hallucinations entirely (mathematically proven)
 
-### Four Components Every RAG System Needs
+### Four Components Every RAG System Has
 
-1. **Document store** (your content)
-2. **Embedding model** (converts text to vectors)
-3. **Vector database** (semantic card catalog)
-4. **LLM** (generates answer using retrieved docs)
+1. **Document store** (your content—FAQs, policies, guides)
+2. **Embedding model** (converts text to vectors for semantic search)
+3. **Vector database** (semantic card catalog that finds similar content)
+4. **LLM** (generates answer using retrieved documents)
 
-Everything else is optional enhancement.
+Everything else is enhancement or optimization.
 
-### Your Librarian Skills Applied to RAG
+### Your Librarian Skills = RAG Expertise
 
-- **Source evaluation** → Which docs go in RAG system?
-- **Cataloging/metadata** → How to structure knowledge?
-- **Reference interviews** → Understanding user needs
-- **Information literacy** → Teaching critical AI use
-- **Workarounds** → Handling imperfect tools
+- **Source evaluation** → Curating RAG knowledge base
+- **Cataloging/metadata** → Structuring documents for retrieval
+- **Reference interviews** → Understanding user information needs
+- **Information literacy** → Teaching critical AI evaluation
+- **Workarounds** → Making imperfect systems work
 
-### Hard Questions to Ask Before Deployment
+You're not learning something completely new. You're applying expertise you already have.
 
-- **Privacy:** Student queries reveal research interests, struggles
-- **Equity:** Tiered access creates information haves/have-nots
-- **Energy:** Training costs $1.5B-3B per model (The Information, 2025)
-- **Censorship:** Who decides what goes in knowledge base?
-- **Hallucinations:** Can reduce but never eliminate (peer-reviewed proof)
+### Hard Questions With No Easy Answers
+
+- **Privacy:** Queries reveal research struggles, health questions, identity explorations
+- **Equity:** Premium tiers create information haves/have-nots
+- **Energy:** Training frontier models costs billions, significant environmental impact
+- **Censorship:** Who decides what goes in the knowledge base? What gets excluded?
+- **Hallucinations:** Can reduce dramatically but never eliminate completely
+- **Displacement:** Does this replace library jobs or augment them?
+
+Have these conversations before you deploy, not after.
+
+### What's Actually Possible vs. Marketing Hype
+
+**Possible:**
+- FAQ chatbots with good citation (proven, working today)
+- Document search with semantic understanding (works well)
+- Research assistance with source grounding (improving rapidly)
+- Reducing hallucinations 70-90% compared to no RAG (peer-reviewed)
+
+**Not possible (yet or ever):**
+- 100% accuracy (mathematically impossible)
+- Perfect understanding of user intent (humans struggle with this too)
+- Replacing librarian judgment (tools need expert curation)
+- Eliminating bias (LLMs reflect training data biases)
+
+Be honest about what RAG can and can't do. Under-promise and over-deliver.
 
 ---
 
-## 15. Stay in Touch & Keep Learning
+## 🔍 Decision Tree: Should You Use RAG?
+
+```
+START: What's your use case?
+
+├─ Answering FAQs from library documents?
+│  └─ YES → RAG is excellent for this
+│     Start with: NotebookLM or presentation Colab demo
+│     Budget: $0-5/month pilot, $10-50/month production
+│
+├─ Discovery layer enhancement?
+│  └─ MAYBE → Consider vendor solutions (Primo, Summon, EBSCO)
+│     Action: Pilot before committing, use ACRL framework for evaluation
+│     Budget: Already paying for discovery layer
+│
+├─ Citation/research help?
+│  └─ YES → RAG works well with proper oversight
+│     Start with: LlamaIndex + OpenAI + human verification
+│     Budget: $20-100/month depending on usage
+│
+├─ General knowledge questions?
+│  └─ NO → Standard LLM probably better
+│     Why: No need for retrieval if not using specific documents
+│     Alternative: ChatGPT, Claude without RAG
+│
+└─ Sensitive/confidential information?
+   └─ MAYBE → Only with local models + privacy audit
+      Requirements: Ollama + local embeddings + ethics review
+      Budget: Hardware costs instead of API costs
+```
+
+---
+
+## 📧 Stay in Touch & Keep Learning
 
 ### Contact
 
 **David Meincke, MSLS**
-Johnson Wales University
+Johnson & Wales University
 dmeincke@jwu.edu | davidmeincke@protonmail.com
 
 Happy to discuss:
@@ -775,46 +858,46 @@ Happy to discuss:
 - Technical troubleshooting
 - Connecting with other library experimenters
 
-### Update This Document
+### Presentation Materials
 
-This resource list will evolve. Check the GitHub repository for updates:
+**GitHub Repository:**
 https://github.com/radio-shaq/Lyrasis-slides-11-2025
 
-### Contribute
+Contains:
+- Slides + speaker notes
+- Working Colab demo notebook
+- Sample FAQ template CSV
+- This resource guide
 
-Found a great resource not listed here? Open an issue or pull request on GitHub.
+### Keep This Document Updated
+
+RAG is evolving rapidly. Check GitHub for updates, or fork and maintain your own version.
+
+**Contribute:** Found a great resource not listed? Open an issue or pull request.
 
 ---
 
-## Quick Reference: Decision Tree
+## 🙏 Final Thoughts
 
-**"Should I use RAG for this project?"**
+Remember: You already have the skills to evaluate RAG systems critically. Your professional judgment as a librarian—your ability to assess sources, understand user needs, navigate ambiguity, and make imperfect systems work—is exactly what's needed to deploy AI thoughtfully in libraries.
 
-```
-START: What's your use case?
+RAG isn't magic. It's a tool, like any other library technology. It has strengths (grounded answers, source citation) and limitations (hallucinations, bias, cost). Your job is the same as always: evaluate critically, implement thoughtfully, and keep the needs of your community at the center.
 
-├─ Answering FAQs from your library's documents?
-│  └─ YES → RAG is excellent for this
-│     Recommended: Start with NotebookLM or Colab demo
-│
-├─ Discovery layer enhancement?
-│  └─ MAYBE → Consider vendor solutions (Primo, Summon, EBSCO)
-│     Recommended: Pilot before committing
-│
-├─ Citation/research help?
-│  └─ YES → RAG works well with proper source verification
-│     Recommended: LlamaIndex + OpenAI + human oversight
-│
-├─ General knowledge questions?
-│  └─ NO → Standard LLM probably better
-│     Recommended: ChatGPT, Claude without RAG
-│
-└─ Sensitive/confidential information?
-   └─ MAYBE → Only with local models + privacy audit
-      Recommended: Ollama + local embeddings + ethics review
-```
+Start small. Test thoroughly. Be honest about limitations. Keep learning.
+
+You've got this.
 
 ---
 
 **Last updated:** November 5, 2025
 **License:** MIT (free to use, adapt, share with attribution)
+**Version:** 3.0 (synthesis)
+
+---
+
+**Quick Links (Most Important Resources):**
+- ⚡ Try today: https://notebooklm.google.com/
+- 📚 Framework: https://www.ala.org/acrl/standards/ai
+- 💻 Demo code: https://github.com/radio-shaq/Lyrasis-slides-11-2025
+- 📖 Follow: https://aarontay.substack.com/
+- 🔬 Research: https://arxiv.org/abs/2401.11817
